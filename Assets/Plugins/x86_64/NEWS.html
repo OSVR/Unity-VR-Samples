@@ -1,0 +1,80 @@
+<h1>OSVR Compatibility Changes</h1>
+
+<p>This is an abbreviated changelog, including only those changes that affect one of:</p>
+
+<ul>
+<li>PluginKit or ClientKit API/ABI</li>
+<li>Library distribution</li>
+<li>Exported CMake-based build system/configuration</li>
+<li>Compatibility between clients and servers</li>
+</ul>
+
+
+<p>Use git for a full changelog.</p>
+
+<p>Entries are labeled with the <code>git describe</code>-derived version of a representative commit and date.</p>
+
+<h2>v0.2 (23-April-2015)</h2>
+
+<p><strong>Affects:</strong> Binding/integration distribution, usage</p>
+
+<p>This is a large update. The main take-aways are that you must update both the client and server due to protocol changes, the number of DLLs has changed, and the config file format has evolved and is much smaller than before.</p>
+
+<p>There are new tools: <code>osvr_print_tree</code> displays the contents of the path tree (try <code>-h</code> for help with command line arguments), and <code>PathTreeExport</code> exports path tree structure to DOT format - see the documentation for usage.</p>
+
+<h2>v0.1-777-g830cc1b (12-March-2015)</h2>
+
+<p><strong>Affects:</strong> Binding/integration distribution</p>
+
+<p><strong>Main change:</strong> The contents of the <code>osvrTransform</code> and <code>osvrRouting</code> shared libraries (<code>.dll</code> files) have been folded into <code>osvrCommon</code> and thus those files are now no longer produced by the build, nor need to be distributed.</p>
+
+<p>This is internal API only, so no changes to apps expected.</p>
+
+<h2>v0.1.728-g47b68e (5-March-2015)</h2>
+
+<p><strong>Affects:</strong> Plugin developers, config files, and install instructions for out of tree plugins</p>
+
+<p><strong>Main change:</strong> Plugin directory/search path and auto-loading</p>
+
+<ul>
+<li>Plugins are now stored in a specific directory (on Windows, <code>/bin/osvr-plugins-0</code>, with accommodations made to handle MSVC build tree directories; similar location on other platforms except in a <code>lib</code> subdirectory) and so have an associated search path, instead of generically on the dynamic loader&rsquo;s search path.</li>
+<li>All dynamic libraries found on the plugin search path are assumed to be plugins, and unless their filename ends in a specific suffix (set up in CMake, defaults to <code>.manualload</code>, e.g. <code>something.manualload.dll</code>), they will be loaded automatically without having their name listed in the <code>plugins</code> portion of the <code>osvr_server_config.json</code> file.</li>
+<li>Explicitly-listed plugins in a config file will be searched for in the new plugin-specific directories, both with and without the <code>.manualload</code> suffix - so listing a plugin explicitly in the config is now only needed for plugins marked <code>.manualload</code></li>
+<li>The CMake function <code>osvr_add_plugin</code> has been overhauled to include support for automatically setting up the appropriate plugin name and install directory. If your plugin is suitable for autoloading, your existing build scripts will work fine, though you may wish to migrate to the new named-parameter syntax for a more concise build.
+
+<ul>
+<li>Updated plugin example build system: <a href="https://github.com/OSVR/OSVR-Core/blob/master/examples/plugin/selfcontained/CMakeLists.txt">https://github.com/OSVR/OSVR-Core/blob/master/examples/plugin/selfcontained/CMakeLists.txt</a></li>
+<li>Documentation of the <code>osvr_add_plugin</code> function, adjacent to its source: <a href="https://github.com/OSVR/OSVR-Core/blob/master/osvrAddPlugin.cmake">https://github.com/OSVR/OSVR-Core/blob/master/osvrAddPlugin.cmake</a></li>
+</ul>
+</li>
+</ul>
+
+
+<h2>v0.1-658-g5dbf08b (2-March-2015)</h2>
+
+<p><strong>Affects:</strong> CMake-based OSVR consumers</p>
+
+<p>This commit and several preceding it improved the build system for out-of-tree consumption.</p>
+
+<ul>
+<li>When pointing <code>osvr_DIR</code> or <code>CMAKE_PREFIX_PATH</code> at a build tree of OSVR-Core, you no longer append <code>/osvr</code> to the build directory. You may want to clear out this directory in your build tree to avoid using outdated build materials.</li>
+<li>As the current releases of CMake cannot automatically find the Boost Windows MSVC binaries in their default install location (and where they are installed by the Boxstarter scripts), a helper script is now included with the OSVR CMake config scripts, and will be used to assist the Boost package finder if Boost has not already been found by the time <code>find_package(osvr)</code> is called. This should generally make things easier, but if you have an unusual system setup it might be &ldquo;too helpful&rdquo; in suggesting where Boost is.</li>
+</ul>
+
+
+<h2>Previously&hellip;</h2>
+
+<p><strong>TODO:</strong> note commits for these</p>
+
+<ul>
+<li><p>Imaging merge:</p>
+
+<ul>
+<li>Added required shared library for clients and servers: <code>osvrCommon</code></li>
+<li>Server/client incompatibility: newer servers can be configured to send &ldquo;string&rdquo; routes for things that aren&rsquo;t trackers (such as imaging devices) - older clients may react badly if connecting to a server that is configured to provide such routes. Client DLLs may be replaced to handle this.</li>
+<li>Initial imaging support in PluginKit and ClientKit - limited to 8-bit-per-channel images with a total image size of just under 64KB.</li>
+</ul>
+</li>
+<li><p><strong>PluginKit API/ABI break:</strong> Unification of PluginKit async and sync device callbacks.</p></li>
+</ul>
+
