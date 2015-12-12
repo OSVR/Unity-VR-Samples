@@ -24,7 +24,8 @@ using System.Collections;
 namespace OSVR
 {
     namespace Unity
-    {       
+    {
+        [RequireComponent(typeof(Camera))] //requires a "dummy" camera     
         public class VRViewer : MonoBehaviour
         {   
             #region Public Variables         
@@ -42,6 +43,21 @@ namespace OSVR
             private uint _eyeCount;
             private uint _viewerIndex;
 
+            private Camera _camera;
+            private bool _disabledCamera = true;
+            public Camera Camera
+            {
+                get
+                {
+                    if (_camera == null)
+                    {
+                        _camera = GetComponent<Camera>();
+                    }
+                    return _camera;
+                }
+                set { _camera = value; }
+            }
+
             #endregion
 
             void Awake()
@@ -52,8 +68,23 @@ namespace OSVR
             void Init()
             {
                 //cache:
+                _camera = GetComponent<Camera>(); //get the "dummy" camera
                 cachedTransform = transform;
             }
+            void OnEnable()
+            {
+                StartCoroutine("EndOfFrame");
+            }
+
+            void OnDisable()
+            {
+                StopCoroutine("EndOfFrame");
+                if (DisplayController.UseRenderManager && DisplayController.RenderManager != null)
+                {
+                    DisplayController.ExitRenderManager();
+                }
+            }
+
 
             //Creates the Eyes of this Viewer
             public void CreateEyes(uint eyeCount)
@@ -117,7 +148,81 @@ namespace OSVR
                     // update the eye's surfaces, includes call to Render
                     eye.UpdateSurfaces();                   
                 }
-            }                  
+            }
+
+            //helper method for updating the client context
+            public void UpdateClient()
+            {
+                DisplayController.UpdateClient();
+            }
+
+            // Culling determines which objects are visible to the camera. OnPreCull is called just before this process.
+            // This gets called because we have a camera component, but we disable the camera here so it doesn't render.
+            // We have the "dummy" camera so existing Unity game code can refer to a MainCamera object.
+            // We update our viewer and eye transforms here because it is as late as possible before rendering happens.
+            // OnPreRender is not called because we disable the camera here.
+            void OnPreCull()
+            {
+                // Disable dummy camera during rendering
+                // Enable after frame ends
+                _camera.enabled = true;
+
+                DoRendering();               
+
+                // Flag that we disabled the camera
+                _disabledCamera = true;
+            }
+
+            // The main rendering loop, should be called late in the pipeline, i.e. from OnPreCull
+            // Set our viewer and eye poses and render to each surface.
+            void DoRendering()
+            {
+                // update poses once DisplayConfig is ready
+                if (DisplayController.CheckDisplayStartup())
+                {
+                    // update the viewer's head pose
+                    // @todo Get viewer pose from RenderManager if UseRenderManager = true
+                    // currently getting viewer pose from DisplayConfig always
+                    UpdateViewerHeadPose(DisplayController.GetViewerPose(ViewerIndex));
+
+                    // each viewer updates its eye poses, viewports, projection matrices
+                    UpdateEyes();
+
+                }
+                else
+                {
+                    if (!DisplayController.CheckDisplayStartup())
+                    {
+                        //@todo do something other than not show anything
+                        Debug.LogError("Display Startup failed. Check HMD connection.");
+                    }
+                }
+            }
+
+            // This couroutine is called every frame.
+            IEnumerator EndOfFrame()
+            {
+                while (true)
+                {
+                    //if we disabled the dummy camera, enable it here
+                    if (_disabledCamera)
+                    {
+                        Camera.enabled = true;
+                        _disabledCamera = false;
+                    }
+                    yield return new WaitForEndOfFrame();
+                    if (DisplayController.UseRenderManager && DisplayController.CheckDisplayStartup())
+                    {
+                        // Issue a RenderEvent, which copies Unity RenderTextures to RenderManager buffers
+#if UNITY_5_2 || UNITY_5_3
+                        GL.IssuePluginEvent(DisplayController.RenderManager.GetRenderEventFunction(), OsvrRenderManager.RENDER_EVENT);
+#else
+                        Debug.LogError("GL.IssuePluginEvent failed. This version of Unity is not supported by RenderManager.");
+#endif
+                    }
+
+                }
+            }
         }
     }
 }

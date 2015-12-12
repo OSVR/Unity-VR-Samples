@@ -1,133 +1,99 @@
 fileFormatVersion: 2
-guid: b505ecb46d46f8748abdafa5bec5eaaf
+guid: 7d43c8bbf37bfbd44bf43bfe5f413f4e
+timeCreated: 1449950123
+licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Pedestal_Extension
-    100002: Pedestal_Extension_01
-    100004: Pedestal_Extension_02
-    100006: Pedestal_Extension_04
-    100008: Pedestal_Extension_07
-    100010: Pedestal_Extension_08
-    100012: Pedestal_Extension_09
-    100014: PedestalAR_01
-    100016: PedestalAR_01 1
-    100018: PedestalAR_02
-    100020: PedestalAR_Shadow_01
-    100022: //RootNode
-    100024: pSphere1
-    100026: Pedestal_Extension_010
-    100028: Pedestal_Extension_011
-    100030: Pedestal_Extension_012
-    100032: Pedestal_Extension_013
-    100034: Pedestal_Extension_014
-    100036: polySurface16
-    100038: polySurface17
-    100040: pPlane1
-    100042: pPlane2
-    100044: pPlane3
-    100046: pPlane4
-    100048: pPlane5
-    100050: pPlane6
-    100052: pPlane7
-    100054: pPlane8
-    100056: transform1
-    100058: transform2
-    100060: transform3
-    100062: transform4
-    100064: transform5
-    100066: transform6
-    100068: transform7
-    100070: transform8
-    100072: transform9
-    100074: pCylinder3
-    100076: pCylinder4
-    100078: pCylinder5
-    100080: pCylinder6
-    100082: pSphere2
-    400000: Pedestal_Extension
-    400002: Pedestal_Extension_01
-    400004: Pedestal_Extension_02
-    400006: Pedestal_Extension_04
-    400008: Pedestal_Extension_07
-    400010: Pedestal_Extension_08
-    400012: Pedestal_Extension_09
-    400014: PedestalAR_01
-    400016: PedestalAR_01 1
-    400018: PedestalAR_02
-    400020: PedestalAR_Shadow_01
-    400022: //RootNode
-    400024: pSphere1
-    400026: Pedestal_Extension_010
-    400028: Pedestal_Extension_011
-    400030: Pedestal_Extension_012
-    400032: Pedestal_Extension_013
-    400034: Pedestal_Extension_014
-    400036: polySurface16
-    400038: polySurface17
-    400040: pPlane1
-    400042: pPlane2
-    400044: pPlane3
-    400046: pPlane4
-    400048: pPlane5
-    400050: pPlane6
-    400052: pPlane7
-    400054: pPlane8
-    400056: transform1
-    400058: transform2
-    400060: transform3
-    400062: transform4
-    400064: transform5
-    400066: transform6
-    400068: transform7
-    400070: transform8
-    400072: transform9
-    400074: pCylinder3
-    400076: pCylinder4
-    400078: pCylinder5
-    400080: pCylinder6
-    400082: pSphere2
-    2300000: Pedestal_Extension_01
-    2300002: Pedestal_Extension_02
-    2300004: Pedestal_Extension_04
-    2300006: Pedestal_Extension_07
-    2300008: Pedestal_Extension_08
-    2300010: Pedestal_Extension_09
-    2300012: PedestalAR_01 1
-    2300014: PedestalAR_02
-    2300016: PedestalAR_Shadow_01
-    2300018: pSphere1
-    2300020: Pedestal_Extension_010
-    2300022: Pedestal_Extension_011
-    2300024: Pedestal_Extension_012
-    2300026: Pedestal_Extension_013
-    2300028: Pedestal_Extension_014
-    2300030: polySurface17
-    2300032: pCylinder3
-    2300034: pCylinder4
-    2300036: pCylinder5
-    2300038: pCylinder6
+    100000: pCylinder3
+    100002: pCylinder4
+    100004: pCylinder5
+    100006: pCylinder6
+    100008: Pedestal_Extension
+    100010: Pedestal_Extension_01
+    100012: Pedestal_Extension_010
+    100014: Pedestal_Extension_011
+    100016: Pedestal_Extension_012
+    100018: Pedestal_Extension_013
+    100020: Pedestal_Extension_014
+    100022: Pedestal_Extension_02
+    100024: Pedestal_Extension_04
+    100026: Pedestal_Extension_07
+    100028: Pedestal_Extension_08
+    100030: Pedestal_Extension_09
+    100032: PedestalAR_01
+    100034: PedestalAR_01 1
+    100036: PedestalAR_02
+    100038: PedestalAR_Shadow_01
+    100040: polySurface17
+    100042: pSphere1
+    100044: pSphere2
+    100046: //RootNode
+    400000: pCylinder3
+    400002: pCylinder4
+    400004: pCylinder5
+    400006: pCylinder6
+    400008: Pedestal_Extension
+    400010: Pedestal_Extension_01
+    400012: Pedestal_Extension_010
+    400014: Pedestal_Extension_011
+    400016: Pedestal_Extension_012
+    400018: Pedestal_Extension_013
+    400020: Pedestal_Extension_014
+    400022: Pedestal_Extension_02
+    400024: Pedestal_Extension_04
+    400026: Pedestal_Extension_07
+    400028: Pedestal_Extension_08
+    400030: Pedestal_Extension_09
+    400032: PedestalAR_01
+    400034: PedestalAR_01 1
+    400036: PedestalAR_02
+    400038: PedestalAR_Shadow_01
+    400040: polySurface17
+    400042: pSphere1
+    400044: pSphere2
+    400046: //RootNode
+    2300000: pCylinder3
+    2300002: pCylinder4
+    2300004: pCylinder5
+    2300006: pCylinder6
+    2300008: Pedestal_Extension_01
+    2300010: Pedestal_Extension_010
+    2300012: Pedestal_Extension_011
+    2300014: Pedestal_Extension_012
+    2300016: Pedestal_Extension_013
+    2300018: Pedestal_Extension_014
+    2300020: Pedestal_Extension_02
+    2300022: Pedestal_Extension_04
+    2300024: Pedestal_Extension_07
+    2300026: Pedestal_Extension_08
+    2300028: Pedestal_Extension_09
+    2300030: PedestalAR_01 1
+    2300032: PedestalAR_02
+    2300034: PedestalAR_Shadow_01
+    2300036: polySurface17
+    2300038: pSphere1
     2300040: pSphere2
-    3300000: Pedestal_Extension_01
-    3300002: Pedestal_Extension_02
-    3300004: Pedestal_Extension_04
-    3300006: Pedestal_Extension_07
-    3300008: Pedestal_Extension_08
-    3300010: Pedestal_Extension_09
-    3300012: PedestalAR_01 1
-    3300014: PedestalAR_02
-    3300016: PedestalAR_Shadow_01
-    3300018: pSphere1
-    3300020: Pedestal_Extension_010
-    3300022: Pedestal_Extension_011
-    3300024: Pedestal_Extension_012
-    3300026: Pedestal_Extension_013
-    3300028: Pedestal_Extension_014
-    3300030: polySurface17
-    3300032: pCylinder3
-    3300034: pCylinder4
-    3300036: pCylinder5
-    3300038: pCylinder6
+    3300000: pCylinder3
+    3300002: pCylinder4
+    3300004: pCylinder5
+    3300006: pCylinder6
+    3300008: Pedestal_Extension_01
+    3300010: Pedestal_Extension_010
+    3300012: Pedestal_Extension_011
+    3300014: Pedestal_Extension_012
+    3300016: Pedestal_Extension_013
+    3300018: Pedestal_Extension_014
+    3300020: Pedestal_Extension_02
+    3300022: Pedestal_Extension_04
+    3300024: Pedestal_Extension_07
+    3300026: Pedestal_Extension_08
+    3300028: Pedestal_Extension_09
+    3300030: PedestalAR_01 1
+    3300032: PedestalAR_02
+    3300034: PedestalAR_Shadow_01
+    3300036: polySurface17
+    3300038: pSphere1
     3300040: pSphere2
     4300000: PedestalAR_Shadow_01
     4300002: PedestalAR_01
@@ -138,12 +104,12 @@ ModelImporter:
     4300012: Pedestal_Extension_07
     4300014: Pedestal_Extension_08
     4300016: Pedestal_Extension_09
-    4300018: pSphere1
-    4300020: Pedestal_Extension_010
-    4300022: Pedestal_Extension_011
-    4300024: Pedestal_Extension_012
-    4300026: Pedestal_Extension_013
-    4300028: Pedestal_Extension_014
+    4300018: Pedestal_Extension_010
+    4300020: Pedestal_Extension_011
+    4300022: Pedestal_Extension_012
+    4300024: Pedestal_Extension_013
+    4300026: Pedestal_Extension_014
+    4300028: pSphere1
     4300030: polySurface17
     4300032: pCylinder3
     4300034: pCylinder4
@@ -175,7 +141,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.01
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -189,11 +155,11 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 4
+    tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -209,7 +175,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

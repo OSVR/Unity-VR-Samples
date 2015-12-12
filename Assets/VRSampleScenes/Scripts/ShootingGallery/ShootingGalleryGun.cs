@@ -49,19 +49,31 @@ namespace VRStandardAssets.ShootingGallery
 
         private void Update()
         {
-            // Smoothly interpolate this gameobject's rotation towards that of the user/camera.
-            transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
+            if (m_CameraTransform == null)
+            {
+                if (Camera.main != null)
+                {
+                    m_CameraTransform = Camera.main.transform;
+                }
+
+            }
+            if (m_CameraTransform != null)
+            {
+
+                // Smoothly interpolate this gameobject's rotation towards that of the user/camera.
+                transform.rotation = Quaternion.Slerp(transform.rotation, InputTracking.GetLocalRotation(VRNode.Head),
                 m_Damping * (1 - Mathf.Exp(k_DampingCoef * Time.deltaTime)));
-            
-            // Move this gameobject to the camera.
-            transform.position = m_CameraTransform.position;
 
-            // Find a rotation for the gun to be pointed at the reticle.
-            Quaternion lookAtRotation = Quaternion.LookRotation (m_Reticle.ReticleTransform.position - m_GunContainer.position);
+                // Move this gameobject to the camera.
+                transform.position = m_CameraTransform.position;
 
-            // Smoothly interpolate the gun's rotation towards that rotation.
-            m_GunContainer.rotation = Quaternion.Slerp (m_GunContainer.rotation, lookAtRotation,
-                m_GunContainerSmoothing * Time.deltaTime);
+                // Find a rotation for the gun to be pointed at the reticle.
+                Quaternion lookAtRotation = Quaternion.LookRotation(m_Reticle.ReticleTransform.position - m_GunContainer.position);
+
+                // Smoothly interpolate the gun's rotation towards that rotation.
+                m_GunContainer.rotation = Quaternion.Slerp(m_GunContainer.rotation, lookAtRotation,
+                    m_GunContainerSmoothing * Time.deltaTime);
+            }
         }
 
 

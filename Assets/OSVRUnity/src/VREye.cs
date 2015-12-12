@@ -26,6 +26,7 @@ using UnityEngine;
 using System.Collections;
 using System.Reflection;
 using System;
+using UnityEditor;
 
 namespace OSVR
 {
@@ -40,8 +41,8 @@ namespace OSVR
             private VRSurface[] _surfaces; //the surfaces associated with this eye
             private uint _surfaceCount;
             private uint _eyeIndex;
-            
-            
+
+
             #endregion
             #region Public Variables  
             public uint EyeIndex
@@ -49,7 +50,7 @@ namespace OSVR
                 get { return _eyeIndex; }
                 set { _eyeIndex = value; }
             }
-            public VRSurface[] Surfaces { get { return _surfaces; } } 
+            public VRSurface[] Surfaces { get { return _surfaces; } }
             public uint SurfaceCount { get { return _surfaceCount; } }
             public VRViewer Viewer
             {
@@ -75,13 +76,13 @@ namespace OSVR
             {
                 //cache:
                 cachedTransform = transform;
-            }         
+            }
             #endregion
 
             // Updates the position and rotation of the eye
             // Optionally, update the viewer associated with this eye
             public void UpdateEyePose(OSVR.ClientKit.Pose3 eyePose)
-            { 
+            {
                 cachedTransform.localPosition = Math.ConvertPosition(eyePose.translation);
                 cachedTransform.localRotation = Viewer.DisplayController.UseRenderManager ? Math.ConvertOrientationFromRenderManager(eyePose.rotation) : Math.ConvertOrientation(eyePose.rotation);
             }
@@ -127,9 +128,9 @@ namespace OSVR
 
                         //render the surface
                         surface.Render();
-                    }                           
+                    }
 
-                    if(Viewer.DisplayController.UseRenderManager)
+                    if (Viewer.DisplayController.UseRenderManager)
                     {
                         surface.Render();
                         surface.SetActiveRenderTexture();
@@ -173,7 +174,7 @@ namespace OSVR
                     VRSurface surface = surfaceGameObject.AddComponent<VRSurface>();
                     surface.Eye = this;
                     surface.Camera = surfaceGameObject.GetComponent<Camera>(); //VRSurface has camera component by default
-                    CopyCamera(Viewer.DisplayController.Camera, surface.Camera); //copy camera properties from the "dummy" camera to surface camera
+                    CopyCamera(Viewer.Camera, surface.Camera); //copy camera properties from the "dummy" camera to surface camera
                     surface.Camera.enabled = !Viewer.DisplayController.UseRenderManager; //disabled so we can control rendering manually
                     surfaceGameObject.transform.parent = this.transform; //surface is child of Eye
                     surfaceGameObject.transform.localPosition = Vector3.zero;
@@ -181,7 +182,7 @@ namespace OSVR
 
                     //distortion
                     bool useDistortion = Viewer.DisplayController.DisplayConfig.DoesViewerEyeSurfaceWantDistortion(Viewer.ViewerIndex, (byte)_eyeIndex, surfaceIndex);
-                    if(useDistortion)
+                    if (useDistortion)
                     {
                         //@todo figure out which type of distortion to use
                         //right now, there is only one option, SurfaceRadialDistortion
@@ -191,12 +192,12 @@ namespace OSVR
                         Viewer.ViewerIndex, (byte)_eyeIndex, surfaceIndex);
 
                         surface.SetDistortion(distortionParameters);
-                    }    
-                    
+                    }
+
                     //render manager
-                    if(Viewer.DisplayController.UseRenderManager)
+                    if (Viewer.DisplayController.UseRenderManager)
                     {
-                        if(surface.GetRenderTexture() == null)
+                        if (surface.GetRenderTexture() == null)
                         {
                             //Set the surfaces viewport from RenderManager
                             surface.SetViewport(Viewer.DisplayController.RenderManager.GetEyeViewport((int)EyeIndex));
@@ -205,7 +206,7 @@ namespace OSVR
                             RenderTexture renderTexture = new RenderTexture(surface.Viewport.Width, surface.Viewport.Height, 24, RenderTextureFormat.Default);
                             surface.SetRenderTexture(renderTexture);
                         }
-                    }             
+                    }
                 }
             }
 
@@ -216,8 +217,33 @@ namespace OSVR
                 //Copy the camera properties.
                 destCamera.CopyFrom(srcCamera);
                 destCamera.depth = 0;
+                //CopyComponents(srcCamera.gameObject, destCamera.gameObject);
                 //@todo Copy other components attached to the DisplayController?
-            }           
+            }
+
+            private static Type CompType;
+            private void CopyComponents(GameObject g1, GameObject g2)
+            {
+
+                Component[] components = g1.GetComponents<Component>();
+                for (int i = 0; i < components.Length; ++i)
+                {
+                    if (components[i] != null && components[i] != this)
+                    {
+
+                        CompType = components[i].GetType();
+                        if(CompType != typeof(Camera) && CompType !=typeof( DisplayController) && CompType != typeof(OsvrRenderManager) && CompType != typeof(AudioListener) && CompType != typeof(Transform))
+                            g2.AddComponent(CompType);
+
+                        print(CompType);
+                    }
+
+                    if (components[i] == null)
+                        Debug.LogWarning("Warning, component n" + i + "not found in this project");
+                }
+
+
+            }       
         }
     }
 }

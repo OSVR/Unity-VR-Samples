@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: 6094a7b6c4919954e8100ad93be9929f
-timeCreated: 1446117618
-licenseType: Store
+guid: a25a78c715f2cf340bbf66a7293c252b
+timeCreated: 1449950125
+licenseType: Pro
 ModelImporter:
-  serializedVersion: 18
+  serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
@@ -13,8 +13,8 @@ ModelImporter:
     9500000: //RootNode
   materials:
     importMaterials: 1
-    materialName: 1
-    materialSearch: 2
+    materialName: 0
+    materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -52,10 +52,9 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 1
-  importAnimation: 0
+    tangentImportMode: 3
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
@@ -70,7 +69,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

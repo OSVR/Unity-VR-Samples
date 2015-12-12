@@ -5,15 +5,20 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Palace of Orinthalian/[Scenes]/Palace of Orinthalian/The Palace of
+      Orinthalian.unity
+  - enabled: 0
+    path: Assets/OSVRUnity/Sample/VRFirstPerson.unity
   - enabled: 1
-    path: Assets/VRSampleScenes/Scenes/Intro.unity
+    path: Assets/VRSampleScenes/Scenes/Intro_OSVR.unity
   - enabled: 1
-    path: Assets/VRSampleScenes/Scenes/MainMenu.unity
+    path: Assets/VRSampleScenes/Scenes/MainMenu_OSVR.unity
   - enabled: 1
-    path: Assets/VRSampleScenes/Scenes/Maze.unity
+    path: Assets/VRSampleScenes/Scenes/Flyer_OSVR.unity
   - enabled: 1
-    path: Assets/VRSampleScenes/Scenes/Flyer.unity
+    path: Assets/VRSampleScenes/Scenes/Maze_OSVR.unity
   - enabled: 1
-    path: Assets/VRSampleScenes/Scenes/Shooter360.unity
+    path: Assets/VRSampleScenes/Scenes/Shooter180_OSVR.unity
   - enabled: 1
-    path: Assets/VRSampleScenes/Scenes/Shooter180.unity
+    path: Assets/VRSampleScenes/Scenes/Shooter360_OSVR.unity

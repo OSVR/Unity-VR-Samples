@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 906fabe377b8e8f4397285b9c752041a
-timeCreated: 1436968953
-licenseType: Store
+guid: 874514ba1e725fb42b358106a2de021d
+timeCreated: 1449950111
+licenseType: Pro
 AudioImporter:
   serializedVersion: 6
   defaultSettings:
@@ -13,6 +13,7 @@ AudioImporter:
     conversionMode: 0
   platformSettingOverrides: {}
   forceToMono: 0
+  normalize: 1
   preloadAudioData: 1
   loadInBackground: 0
   3D: 1

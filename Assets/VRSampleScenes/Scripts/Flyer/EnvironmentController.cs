@@ -88,6 +88,15 @@ namespace VRStandardAssets.Flyer
             // Get an asteroid from the object pool.
             GameObject asteroidGameObject = m_AsteroidObjectPool.GetGameObjectFromPool ();
 
+            if (m_Cam == null)
+            {
+                if (Camera.main != null)
+                {
+                    m_Cam = Camera.main.transform;
+                }
+                else return;
+            }
+
             // Generate a position at a distance forward from the camera within a random sphere and put the asteroid at that position.
             Vector3 asteroidPosition = m_Cam.position + Vector3.forward * m_SpawnZoneDistance + Random.insideUnitSphere * m_AsteroidSpawnZoneRadius;
             asteroidGameObject.transform.position = asteroidPosition;
@@ -119,6 +128,15 @@ namespace VRStandardAssets.Flyer
         {
             // Get a ring from the object pool.
             GameObject ringGameObject = m_RingObjectPool.GetGameObjectFromPool ();
+
+            if (m_Cam == null)
+            {
+                if (Camera.main != null)
+                {
+                    m_Cam = Camera.main.transform;
+                }
+                else return;
+            }
 
             // Generate a position at a distance forward from the camera within a random sphere and put the ring at that position.
             Vector3 ringPosition = m_Cam.position + Vector3.forward * m_SpawnZoneDistance + Random.insideUnitSphere * m_RingSpawnZoneRadius;

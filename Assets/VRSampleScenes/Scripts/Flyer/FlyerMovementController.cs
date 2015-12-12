@@ -47,6 +47,13 @@ namespace VRStandardAssets.Flyer
         {
             // The game is now running.
             m_IsGameRunning = true;
+            if (m_Camera == null)
+            {
+                if (Camera.main != null)
+                {
+                    m_Camera = Camera.main.transform;
+                }
+            }
 
             // Start the flyer moving.
             StartCoroutine (MoveFlyer ());
@@ -71,32 +78,43 @@ namespace VRStandardAssets.Flyer
         {
             while (m_IsGameRunning)
             {
-                // Set the target marker position to a point forward of the camera multiplied by the distance from the camera.
-                Quaternion headRotation = InputTracking.GetLocalRotation (VRNode.Head);
-                m_TargetMarker.position = m_Camera.position + (headRotation * Vector3.forward) * m_DistanceFromCamera;
+                if (m_Camera == null)
+                {
+                    if (Camera.main != null)
+                    {
+                        m_Camera = Camera.main.transform;
+                    }
+                }
+                if (m_Camera != null)
+                {
+                    // Set the target marker position to a point forward of the camera multiplied by the distance from the camera.
+                    Quaternion headRotation = m_Camera.rotation;//InputTracking.GetLocalRotation(VRNode.Head);
+                    m_TargetMarker.position = m_Camera.position + (headRotation * Vector3.forward) * m_DistanceFromCamera;
 
-                // Move the camera container forward.
-                m_CameraContainer.Translate (Vector3.forward * Time.deltaTime * m_Speed);
+                    // Move the camera container forward.
+                    m_CameraContainer.Translate(Vector3.forward * Time.deltaTime * m_Speed);
 
-                // Move the flyer towards the target marker.
-                m_Flyer.position = Vector3.Lerp(m_Flyer.position, m_TargetMarker.position,
-                    m_Damping * (1f - Mathf.Exp (k_ExpDampingCoef * Time.deltaTime)));
+                    // Move the flyer towards the target marker.
+                    m_Flyer.position = Vector3.Lerp(m_Flyer.position, m_TargetMarker.position,
+                        m_Damping * (1f - Mathf.Exp(k_ExpDampingCoef * Time.deltaTime)));
 
-                // Calculate the vector from the target marker to the flyer.
-                Vector3 dist = m_Flyer.position - m_TargetMarker.position;
+                    // Calculate the vector from the target marker to the flyer.
+                    Vector3 dist = m_Flyer.position - m_TargetMarker.position;
 
-                // Base the target markers pitch (x rotation) on the distance in the y axis and it's roll (z rotation) on the distance in the x axis.
-                m_TargetMarker.eulerAngles = new Vector3 (dist.y, 0f, dist.x) * k_BankingCoef;
+                    // Base the target markers pitch (x rotation) on the distance in the y axis and it's roll (z rotation) on the distance in the x axis.
+                    m_TargetMarker.eulerAngles = new Vector3(dist.y, 0f, dist.x) * k_BankingCoef;
 
-                // Make the flyer bank towards the marker.
-                m_Flyer.rotation = Quaternion.Lerp(m_Flyer.rotation, m_TargetMarker.rotation,
-                    m_Damping * (1f - Mathf.Exp (k_ExpDampingCoef * Time.deltaTime)));
+                    // Make the flyer bank towards the marker.
+                    m_Flyer.rotation = Quaternion.Lerp(m_Flyer.rotation, m_TargetMarker.rotation,
+                        m_Damping * (1f - Mathf.Exp(k_ExpDampingCoef * Time.deltaTime)));
 
-                // Update the score text.
-                m_CurrentScore.text = "Score: " + SessionData.Score;
+                    // Update the score text.
+                    m_CurrentScore.text = "Score: " + SessionData.Score;
 
-                // Wait until next frame.
-                yield return null;
+                    // Wait until next frame.
+                    yield return null;
+                }
+                
             }
         }
     }

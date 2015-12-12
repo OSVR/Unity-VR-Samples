@@ -30,6 +30,15 @@ namespace VRStandardAssets.Utils
 
         private void Update()
         {
+            if (m_Camera == null)
+            {
+                if (Camera.main != null)
+                {
+                    m_Camera = Camera.main.transform;
+                }
+                else return;
+            }
+
             // The vector in which the player should be facing is the forward direction of the transform specified or world space.
             Vector3 desiredForward = m_DesiredDirection == null ? Vector3.forward : m_DesiredDirection.forward;
 

@@ -41,7 +41,6 @@ namespace OSVR
         //
         // In this implementation, we are assuming that there is exactly one viewer and one surface per eye.
         //*/
-        [RequireComponent(typeof(Camera))] //requires a "dummy" camera
         public class DisplayController : MonoBehaviour
         {
 
@@ -54,8 +53,6 @@ namespace OSVR
             private uint _viewerCount;
             private bool _displayConfigInitialized = false;
             private bool _checkDisplayStartup = false;
-            private Camera _camera;
-            private bool _disabledCamera = true;
             private uint _totalDisplayWidth;
             private uint _totalSurfaceHeight;
 
@@ -63,19 +60,8 @@ namespace OSVR
             private OsvrRenderManager _renderManager;
             private bool _useRenderManager = false; //requires Unity 5.2+ and RenderManager configured osvr server
             public bool UseRenderManager { get { return _useRenderManager; } }
+ 
 
-            public Camera Camera
-            {
-                get
-                {
-                    if (_camera == null)
-                    {
-                        _camera = GetComponent<Camera>();
-                    }
-                    return _camera;
-                }
-                set { _camera = value; }
-            }
             public OSVR.ClientKit.DisplayConfig DisplayConfig
             {
                 get { return _displayConfig; }
@@ -118,24 +104,11 @@ namespace OSVR
                 {
                     Debug.LogError("DisplayController requires a ClientKit object in the scene.");
                 }
-                _camera = GetComponent<Camera>(); //get the "dummy" camera
+               
                 SetupApplicationSettings();
 
             }
-
-            void OnEnable()
-            {
-                StartCoroutine("EndOfFrame");
-            }
-
-            void OnDisable()
-            {
-                StopCoroutine("EndOfFrame");
-                if (_useRenderManager && RenderManager != null)
-                {
-                    RenderManager.ExitRenderManager();
-                }
-            }
+  
 
             void SetupApplicationSettings()
             {
@@ -223,7 +196,8 @@ namespace OSVR
 
                 //create scene objects 
                 CreateHeadAndEyes();
-                Camera.cullingMask = 0;
+                //copy components to VRViewer camera
+                //CopyComponentsToMainCamera();
             }
 
             //Set Resolution of the Unity game window based on total surface width
@@ -243,8 +217,9 @@ namespace OSVR
                 }
 
                 //Set the resolution. Don't force fullscreen if we have multiple display inputs
+                //We only need to do this if we aren't using RenderManager, because it adjusts the window size for us
                 //@todo figure out why this causes problems with direct mode, perhaps overfill factor?
-                if(numDisplayInputs > 1)
+                if(numDisplayInputs > 1 && !UseRenderManager)
                 {
                     Screen.SetResolution((int)TotalDisplayWidth, (int)TotalDisplayHeight, false);
                 }                             
@@ -278,6 +253,13 @@ namespace OSVR
                     vrViewer.transform.parent = this.transform; //child of DisplayController
                     vrViewer.transform.localPosition = Vector3.zero;
                     _viewers[viewerIndex] = vrViewerComponent;
+                    vrViewer.tag = "MainCamera";
+
+                    //destroy the Camera attached to DisplayController
+                    if(GetComponent<Camera>())
+                    {
+                        Destroy(GetComponent<Camera>());
+                    }
 
                     // create Viewer's VREyes
                     uint eyeCount = (uint)_displayConfig.GetNumEyesForViewer(viewerIndex); //get the number of eyes for this viewer
@@ -292,6 +274,10 @@ namespace OSVR
                 {
                     SetupDisplay();
                 }
+                if (!_checkDisplayStartup && _displayConfigInitialized)
+                {
+                    _checkDisplayStartup = DisplayConfig.CheckDisplayStartup();
+                }
             }
 
             //helper method for updating the client context
@@ -300,82 +286,21 @@ namespace OSVR
                 _clientKit.context.update();
             }
 
-            // Culling determines which objects are visible to the camera. OnPreCull is called just before this process.
-            // This gets called because we have a camera component, but we disable the camera here so it doesn't render.
-            // We have the "dummy" camera so existing Unity game code can refer to a MainCamera object.
-            // We update our viewer and eye transforms here because it is as late as possible before rendering happens.
-            // OnPreRender is not called because we disable the camera here.
-            void OnPreCull()
+            public bool CheckDisplayStartup()
             {
-                // Disable dummy camera during rendering
-                // Enable after frame ends
-                _camera.enabled = false;
-
-                DoRendering();
-                if (!_checkDisplayStartup && _displayConfigInitialized)
-                {
-                    _checkDisplayStartup = DisplayConfig.CheckDisplayStartup();
-                }
-
-                // Flag that we disabled the camera
-                _disabledCamera = true;
+                return DisplayConfig.CheckDisplayStartup();
             }
 
-            // The main rendering loop, should be called late in the pipeline, i.e. from OnPreCull
-            // Set our viewer and eye poses and render to each surface.
-            void DoRendering()
+            public OSVR.ClientKit.Pose3 GetViewerPose(uint viewerIndex)
             {
-                // for each viewer, update each eye, which will update each surface
-                for (uint viewerIndex = 0; viewerIndex < _viewerCount; viewerIndex++)
-                {
-                    VRViewer viewer = Viewers[viewerIndex];
-
-                    // update poses once DisplayConfig is ready
-                    if (_checkDisplayStartup)
-                    {
-                        // update the viewer's head pose
-                        // @todo Get viewer pose from RenderManager if UseRenderManager = true
-                        // currently getting viewer pose from DisplayConfig always
-                        viewer.UpdateViewerHeadPose(DisplayConfig.GetViewerPose(viewerIndex));
-
-                        // each viewer updates its eye poses, viewports, projection matrices
-                        viewer.UpdateEyes();
-                    }
-                    else
-                    {
-                        _checkDisplayStartup = DisplayConfig.CheckDisplayStartup();
-                        if (!_checkDisplayStartup)
-                        {
-                            Debug.LogError("Display Startup failed. Check HMD connection.");
-                        }
-                    }
-                }
+                return DisplayConfig.GetViewerPose(viewerIndex);
             }
 
-            // This couroutine is called every frame.
-            IEnumerator EndOfFrame()
+            internal void ExitRenderManager()
             {
-                while (true)
-                {
-                    //if we disabled the dummy camera, enable it here
-                    if (_disabledCamera)
-                    {
-                        Camera.enabled = true;
-                        _disabledCamera = false;
-                    }
-                    yield return new WaitForEndOfFrame();
-                    if (_useRenderManager && _checkDisplayStartup)
-                    {
-                        // Issue a RenderEvent, which copies Unity RenderTextures to RenderManager buffers
-#if UNITY_5_2 || UNITY_5_3
-                        GL.IssuePluginEvent(_renderManager.GetRenderEventFunction(), OsvrRenderManager.RENDER_EVENT);
-#else
-                        Debug.LogError("GL.IssuePluginEvent failed. This version of Unity is not supported by RenderManager.");
-#endif
-                    }
-
-                }
+                RenderManager.ExitRenderManager();
             }
+
         }
     }
 }

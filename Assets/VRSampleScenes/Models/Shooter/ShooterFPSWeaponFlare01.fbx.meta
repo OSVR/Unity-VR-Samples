@@ -1,21 +1,20 @@
 fileFormatVersion: 2
-guid: d6ea95de93448c7408900ef2fb236577
-timeCreated: 1446114871
-licenseType: Store
+guid: b1a095bf4acc4a74d877625570e321e8
+timeCreated: 1449950125
+licenseType: Pro
 ModelImporter:
-  serializedVersion: 18
+  serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: GeoSphere001
-    4300002: ShooterFPSWeaponFlare01
+    4300000: ShooterFPSWeaponFlare01
     9500000: //RootNode
   materials:
     importMaterials: 1
-    materialName: 1
-    materialSearch: 2
+    materialName: 0
+    materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -53,10 +52,9 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 1
-  importAnimation: 0
+    tangentImportMode: 3
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
@@ -71,7 +69,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

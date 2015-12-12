@@ -126,6 +126,15 @@ namespace VRStandardAssets.Utils
             // Set the position of the warning to that of the Reticle.
             m_TextTransform.position = m_Reticle.ReticleTransform.position;
 
+            if (m_Camera == null)
+            {
+                if (Camera.main != null)
+                {
+                    m_Camera = Camera.main.transform;
+                }
+
+            }
+
             // Set the rotation of the warning to facing the camera but oriented so it's up is along the global y axis.
             m_TextTransform.rotation = Quaternion.LookRotation (m_Camera.forward);
             

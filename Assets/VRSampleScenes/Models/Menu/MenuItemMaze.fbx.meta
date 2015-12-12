@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 4b250d04710830b408d09e9b54fbfd63
-timeCreated: 1439473397
-licenseType: Store
+guid: eebae226cd159724f8d8e60b996c9fa4
+timeCreated: 1449950131
+licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -9,14 +9,11 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: MenuItemaMaze001
-    4300002: MenuItemMaze001
-    4300004: MenuItemMaze
-    9500000: //RootNode
+    4300000: MenuItemMaze
   materials:
-    importMaterials: 0
-    materialName: 1
-    materialSearch: 2
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -55,7 +52,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 4
+    tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
