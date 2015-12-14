@@ -196,8 +196,6 @@ namespace OSVR
 
                 //create scene objects 
                 CreateHeadAndEyes();
-                //copy components to VRViewer camera
-                //CopyComponentsToMainCamera();
             }
 
             //Set Resolution of the Unity game window based on total surface width
@@ -243,30 +241,36 @@ namespace OSVR
 
                 uint viewerIndex = 0;
 
-                //Check if there is already a VRViewer in the scene.
-                VRViewer viewer = FindObjectOfType<VRViewer>();
-                if (viewer != null)
+                //Check if there are already VRViewers in the scene.
+                //If so, create eyes for them.
+                VRViewer[] viewersInScene = FindObjectsOfType<VRViewer>();
+                if (viewersInScene != null && viewersInScene.Length > 0)
                 {
-                    // get the VRViewer gameobject
-                    GameObject vrViewer = viewer.gameObject;
-                    vrViewer.name = "VRViewer" + viewerIndex; //change its name to VRViewer0
-                    //@todo optionally add components                      
-                    if (vrViewer.GetComponent<AudioListener>() == null)
+                    for(viewerIndex = 0; viewerIndex < viewersInScene.Length; viewerIndex++)
                     {
-                        vrViewer.AddComponent<AudioListener>(); //add an audio listener
-                    }
-                    viewer.DisplayController = this; //pass DisplayController to Viewers  
-                    viewer.ViewerIndex = viewerIndex; //set the viewer's index                         
-                    vrViewer.transform.parent = this.transform; //child of DisplayController
-                    vrViewer.transform.localPosition = Vector3.zero;
-                    _viewers[viewerIndex] = viewer;
-                    vrViewer.tag = "MainCamera"; //set the MainCamera tag for other objects to reference
+                        VRViewer viewer = viewersInScene[viewerIndex];
+                        // get the VRViewer gameobject
+                        GameObject vrViewer = viewer.gameObject;
+                        vrViewer.name = "VRViewer" + viewerIndex; //change its name to VRViewer0
+                        //@todo optionally add components                      
+                        if (vrViewer.GetComponent<AudioListener>() == null)
+                        {
+                            vrViewer.AddComponent<AudioListener>(); //add an audio listener
+                        }
+                        viewer.DisplayController = this; //pass DisplayController to Viewers  
+                        viewer.ViewerIndex = viewerIndex; //set the viewer's index                         
+                        vrViewer.transform.parent = this.transform; //child of DisplayController
+                        vrViewer.transform.localPosition = Vector3.zero;
+                        _viewers[viewerIndex] = viewer;
+                        if( viewerIndex == 0)
+                        {
+                            vrViewer.tag = "MainCamera"; //set the MainCamera tag for the first Viewer
+                        }
 
-                    // create Viewer's VREyes
-                    uint eyeCount = (uint)_displayConfig.GetNumEyesForViewer(viewerIndex); //get the number of eyes for this viewer
-                    viewer.CreateEyes(eyeCount);
-
-                    viewerIndex++; //increment the index of viewers in the scene
+                        // create Viewer's VREyes
+                        uint eyeCount = (uint)_displayConfig.GetNumEyesForViewer(viewerIndex); //get the number of eyes for this viewer
+                        viewer.CreateEyes(eyeCount);
+                    }         
                 }
 
                 // loop through viewers because at some point we could support multiple viewers
@@ -293,6 +297,7 @@ namespace OSVR
                     vrViewerComponent.CreateEyes(eyeCount);
                 }
             }
+
             void Update()
             {
                 // sometimes it takes a few frames to get a DisplayConfig from ClientKit
@@ -316,11 +321,6 @@ namespace OSVR
             public bool CheckDisplayStartup()
             {
                 return _displayConfigInitialized && DisplayConfig.CheckDisplayStartup();
-            }
-
-            public OSVR.ClientKit.Pose3 GetViewerPose(uint viewerIndex)
-            {
-                return DisplayConfig.GetViewerPose(viewerIndex);
             }
 
             internal void ExitRenderManager()

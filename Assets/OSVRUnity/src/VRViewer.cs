@@ -25,7 +25,7 @@ namespace OSVR
 {
     namespace Unity
     {
-        [RequireComponent(typeof(Camera))] //requires a "dummy" camera     
+        [RequireComponent(typeof(Camera))]   
         public class VRViewer : MonoBehaviour
         {   
             #region Public Variables         
@@ -68,7 +68,7 @@ namespace OSVR
             void Init()
             {
                 //cache:
-                _camera = GetComponent<Camera>(); //get the "dummy" camera
+                _camera = GetComponent<Camera>();
                 cachedTransform = transform;
                 if(DisplayController == null)
                 {
@@ -107,7 +107,14 @@ namespace OSVR
                     uint eyeSurfaceCount = DisplayController.DisplayConfig.GetNumSurfacesForViewerEye(ViewerIndex, (byte)eyeIndex);
                     eye.CreateSurfaces(eyeSurfaceCount);
                 }
-            }  
+            }
+
+            //Get an updated tracker position + orientation
+            public OSVR.ClientKit.Pose3 GetViewerPose(uint viewerIndex)
+            {
+                return DisplayController.DisplayConfig.GetViewerPose(viewerIndex);
+            }
+
 
             //Updates the position and rotation of the head
             public void UpdateViewerHeadPose(OSVR.ClientKit.Pose3 headPose)
@@ -154,6 +161,7 @@ namespace OSVR
                 }
             }
 
+
             //helper method for updating the client context
             public void UpdateClient()
             {
@@ -171,7 +179,7 @@ namespace OSVR
                 // Enable after frame ends
                 _camera.enabled = true;
 
-                DoRendering();               
+                DoRendering();
 
                 // Flag that we disabled the camera
                 _disabledCamera = true;
@@ -181,17 +189,13 @@ namespace OSVR
             // Set our viewer and eye poses and render to each surface.
             void DoRendering()
             {
-                if(DisplayController == null)
-                {
-
-                }
                 // update poses once DisplayConfig is ready
                 if (DisplayController.CheckDisplayStartup())
                 {
                     // update the viewer's head pose
                     // @todo Get viewer pose from RenderManager if UseRenderManager = true
                     // currently getting viewer pose from DisplayConfig always
-                    UpdateViewerHeadPose(DisplayController.GetViewerPose(ViewerIndex));
+                    UpdateViewerHeadPose(GetViewerPose(ViewerIndex));
 
                     // each viewer updates its eye poses, viewports, projection matrices
                     UpdateEyes();
