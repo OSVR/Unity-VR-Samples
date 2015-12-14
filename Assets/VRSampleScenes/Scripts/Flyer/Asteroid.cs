@@ -44,10 +44,7 @@ namespace VRStandardAssets.Flyer
             m_FlyerHealthController = FindObjectOfType<FlyerHealthController>();
             m_Flyer = m_FlyerHealthController.gameObject;
 
-            if (Camera.main != null)
-            {
-                m_Cam = Camera.main.transform;
-            }
+            m_Cam = Camera.main.transform;
         }
 
 
@@ -71,14 +68,6 @@ namespace VRStandardAssets.Flyer
 
         private void Update()
         {
-            if (m_Cam == null)
-            {
-                if (Camera.main != null)
-                {
-                    m_Cam = Camera.main.transform;
-                }
-                else return;
-            }
             // Move and rotate the asteroid given the previously set up parameters.
             m_RigidBody.MoveRotation (m_RigidBody.rotation * Quaternion.AngleAxis (m_RotationSpeed * Time.deltaTime, m_RotationAxis));
             m_RigidBody.MovePosition (m_RigidBody.position - Vector3.forward * m_Speed * Time.deltaTime);

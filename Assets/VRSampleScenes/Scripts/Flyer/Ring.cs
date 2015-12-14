@@ -61,27 +61,13 @@ namespace VRStandardAssets.Flyer
             }
 
             // Set references to the camera and flyer.
-            if (m_Cam == null)
-            {
-                if (Camera.main != null)
-                {
-                    m_Cam = Camera.main.transform;
-                }
-            }
+            m_Cam = Camera.main.transform;
             m_Flyer = GameObject.FindGameObjectWithTag ("Player");
         }
 
 
         private void Update()
         {
-            if (m_Cam == null)
-            {
-                if (Camera.main != null)
-                {
-                    m_Cam = Camera.main.transform;
-                }
-                else return;
-            }
             // If the ring is far enough behind the camera and something is subscribed to OnRingRemove call it.
             if (transform.position.z < m_Cam.position.z - k_RemovalDistance)
                 if (OnRingRemove != null)

@@ -1,20 +1,21 @@
 fileFormatVersion: 2
-guid: c40b9335bc9a0544aa42626e77516824
-timeCreated: 1449950127
-licenseType: Pro
+guid: 843fe35f74533134fbfee4ab90c138a8
+timeCreated: 1444300347
+licenseType: Store
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Shooter360BgCollision001
-    9500000: //RootNode
+    4300000: Shooter360Bg001
+    4300002: Shooter360BgCollision
+    4300004: Shooter360BgCollision001
   materials:
     importMaterials: 1
-    materialName: 0
-    materialSearch: 1
+    materialName: 1
+    materialSearch: 2
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -52,8 +53,9 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 3
+    tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -69,7 +71,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

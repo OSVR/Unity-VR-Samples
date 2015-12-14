@@ -70,6 +70,10 @@ namespace OSVR
                 //cache:
                 _camera = GetComponent<Camera>(); //get the "dummy" camera
                 cachedTransform = transform;
+                if(DisplayController == null)
+                {
+                    DisplayController = FindObjectOfType<DisplayController>();
+                }
             }
             void OnEnable()
             {
@@ -177,6 +181,10 @@ namespace OSVR
             // Set our viewer and eye poses and render to each surface.
             void DoRendering()
             {
+                if(DisplayController == null)
+                {
+
+                }
                 // update poses once DisplayConfig is ready
                 if (DisplayController.CheckDisplayStartup())
                 {

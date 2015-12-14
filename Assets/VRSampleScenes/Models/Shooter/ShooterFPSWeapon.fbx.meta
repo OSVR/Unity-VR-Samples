@@ -1,20 +1,33 @@
 fileFormatVersion: 2
-guid: ce77d6bfe11670f4ab8eb2ee4ab19e1d
-timeCreated: 1449950128
-licenseType: Pro
+guid: 47509307932d1e140a2b4d9024d228e4
+timeCreated: 1440144489
+licenseType: Store
 ModelImporter:
-  serializedVersion: 19
+  serializedVersion: 18
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
+    100000: char_fpsAstrella_forearm
+    100002: prop_sciFiGun2
+    100004: //RootNode
+    100006: ShooterFPSWeapon001
+    100008: transform1
+    100010: transform2
+    400000: char_fpsAstrella_forearm
+    400002: prop_sciFiGun2
+    400004: //RootNode
+    400006: ShooterFPSWeapon001
+    400008: transform1
+    400010: transform2
+    2300000: ShooterFPSWeapon001
+    2300002: //RootNode
+    3300000: ShooterFPSWeapon001
+    3300002: //RootNode
     4300000: ShooterFPSWeapon001
+    4300002: ShooterFPSWeapon
     9500000: //RootNode
   materials:
     importMaterials: 1
-    materialName: 0
-    materialSearch: 1
+    materialName: 1
+    materialSearch: 2
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -25,7 +38,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -52,8 +65,9 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 3
+    tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -69,7 +83,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

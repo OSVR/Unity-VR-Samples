@@ -34,14 +34,7 @@ namespace VRStandardAssets.ShootingGallery
         private void Awake()
         {
             // Setup the references.
-            if (m_CameraTransform == null)
-            {
-                if (Camera.main != null)
-                {
-                    m_CameraTransform = Camera.main.transform;
-                }
-
-            }
+            m_CameraTransform = Camera.main.transform;
             m_Audio = GetComponent<AudioSource> ();
             m_InteractiveItem = GetComponent<VRInteractiveItem>();
             m_Renderer = GetComponent<Renderer>();
@@ -71,9 +64,7 @@ namespace VRStandardAssets.ShootingGallery
         public void Restart (float gameTimeRemaining)
         {
             // When the target is spawned turn the visual and physical aspects on.
-            if(m_Renderer)
-                m_Renderer.enabled = true;
-
+            m_Renderer.enabled = true;
             m_Collider.enabled = true;
 
             // Since the target has just spawned, it's not ending yet.

@@ -218,14 +218,6 @@ namespace VRStandardAssets.ShootingGallery
             Vector2 randomCirclePoint = Random.insideUnitCircle.normalized *
                                   Random.Range (m_SphereSpawnInnerRadius, m_SphereSpawnOuterRadius);
 
-            if (m_Camera == null)
-            {
-                if (Camera.main != null)
-                {
-                    m_Camera = Camera.main.transform;
-                }
-
-            }
             // Find a random height between the camera's height and the maximum.
             float randomHeight = Random.Range (m_Camera.position.y, m_SphereSpawnMaxHeight);
 

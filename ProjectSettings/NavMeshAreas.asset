@@ -16,8 +16,8 @@ NavMeshLayers:
     cost: 2
     editType: 2
   User Layer 0:
-    name: 
-    cost: 1
+    name: Terrain
+    cost: 50
     editType: 3
   User Layer 1:
     name: 

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 26d874db581679e40b24a6d7769a0ede
-timeCreated: 1449950119
-licenseType: Pro
+guid: f4733ebc17a85784d9c91ee76cdbb23f
+timeCreated: 1439473397
+licenseType: Store
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -9,11 +9,14 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: MenuItemFlyer
+    4300000: MenuItemFlyer001
+    4300002: MenuItem360Shooter001
+    4300004: MenuItemFlyer
+    9500000: //RootNode
   materials:
-    importMaterials: 1
-    materialName: 0
-    materialSearch: 1
+    importMaterials: 0
+    materialName: 1
+    materialSearch: 2
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -52,7 +55,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 3
+    tangentImportMode: 4
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

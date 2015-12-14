@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: fc2776f8f70f6774695836d28d56aa65
-timeCreated: 1449950135
-licenseType: Pro
+guid: 4b54f5175f1754247adba209907aebb9
+timeCreated: 1439479010
+licenseType: Store
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -9,11 +9,13 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: MenuItem360Shooter
+    4300000: MenuItem360Shooter001
+    4300002: MenuItem360Shooter
+    9500000: //RootNode
   materials:
-    importMaterials: 1
-    materialName: 0
-    materialSearch: 1
+    importMaterials: 0
+    materialName: 1
+    materialSearch: 2
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -52,7 +54,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 3
+    tangentImportMode: 4
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

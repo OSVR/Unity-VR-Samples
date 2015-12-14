@@ -26,7 +26,6 @@ using UnityEngine;
 using System.Collections;
 using System.Reflection;
 using System;
-using UnityEditor;
 
 namespace OSVR
 {

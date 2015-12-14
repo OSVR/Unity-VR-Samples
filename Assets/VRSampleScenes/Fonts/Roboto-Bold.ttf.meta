@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 078908da862ff4942bc4565ebf439cde
-timeCreated: 1449950117
-licenseType: Pro
+guid: 29aefb354c7bf5f44bdb6724d5d2bf04
+timeCreated: 1444382442
+licenseType: Store
 TrueTypeFontImporter:
   serializedVersion: 2
   fontSize: 16
@@ -11,7 +11,6 @@ TrueTypeFontImporter:
   includeFontData: 1
   use2xBehaviour: 0
   fontNames: []
-  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   userData: 

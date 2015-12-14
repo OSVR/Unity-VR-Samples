@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: 05ef5c4b022618d45a96794483325af0
-timeCreated: 1449950118
-licenseType: Pro
+guid: fa4c7e46d43e2d74aa8f5491fd31e336
+timeCreated: 1447847269
+licenseType: Store
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -19,8 +19,8 @@ ModelImporter:
     4300002: MazeFloor
   materials:
     importMaterials: 1
-    materialName: 0
-    materialSearch: 1
+    materialName: 1
+    materialSearch: 2
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -46,7 +46,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
