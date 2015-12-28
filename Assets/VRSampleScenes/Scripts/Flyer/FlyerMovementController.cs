@@ -74,7 +74,7 @@ namespace VRStandardAssets.Flyer
                 // Set the target marker position to a point forward of the camera multiplied by the distance from the camera.
                 //InputTracking.GetLocalRotation(VRNode.Head);
                 //m_Camera.transform.rotation
-                Quaternion headRotation = InputTracking.GetLocalRotation(VRNode.Head);
+                Quaternion headRotation = m_Camera.transform.rotation;
                 m_TargetMarker.position = m_Camera.position + (headRotation * Vector3.forward) * m_DistanceFromCamera;
 
                 // Move the camera container forward.
