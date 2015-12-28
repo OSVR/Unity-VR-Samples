@@ -19,7 +19,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &123592
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -102,8 +102,8 @@ GameObject:
   - 114: {fileID: 11454826}
   - 114: {fileID: 11401964}
   - 114: {fileID: 11420228}
-  - 114: {fileID: 11491458}
   - 114: {fileID: 11408204}
+  - 114: {fileID: 11453098}
   - 114: {fileID: 11476228}
   m_Layer: 0
   m_Name: VRViewer0
@@ -136,11 +136,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 143892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 480794}
-  - {fileID: 22499580}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &480794
@@ -152,7 +151,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 22499580}
   m_Father: {fileID: 458590}
   m_RootOrder: 0
 --- !u!20 &2005262
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DefaultDistance: 200
-  m_UseNormal: 0
+  m_UseNormal: 1
   m_Image: {fileID: 11449550}
   m_ReticleTransform: {fileID: 22495668}
   m_Camera: {fileID: 480794}
@@ -379,9 +379,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 143892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f00f8819cd5cccd438bb2429207bcc17, type: 3}
+  m_Script: {fileID: 11500000, guid: c2b982789045b4641a4c4898908314b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showDirectModePreview: 1
 --- !u!114 &11449550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -409,6 +410,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11453098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc21d660b6557940a0cce1888e22fed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MenuSceneName: MainMenu_OSVR
+  m_VRInput: {fileID: 11460288}
+  m_VRCameraFade: {fileID: 11420228}
 --- !u!114 &11454826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -445,7 +460,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 188482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1792a31c0b29efc459f93b48f39f527f, type: 3}
+  m_Script: {fileID: 11500000, guid: 425e251a3200841b98a61cd7234fc119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cachedTransform: {fileID: 0}
@@ -461,20 +476,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Canvas: {fileID: 22350072}
---- !u!114 &11491458
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 188482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efc21d660b6557940a0cce1888e22fed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MenuSceneName: MainMenu_OSVR
-  m_VRInput: {fileID: 11460288}
-  m_VRCameraFade: {fileID: 11420228}
 --- !u!124 &12487908
 Behaviour:
   m_ObjectHideFlags: 1
@@ -606,8 +607,8 @@ RectTransform:
   m_Children:
   - {fileID: 22495668}
   - {fileID: 22493040}
-  m_Father: {fileID: 458590}
-  m_RootOrder: 1
+  m_Father: {fileID: 480794}
+  m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}

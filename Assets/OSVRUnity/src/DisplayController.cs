@@ -52,15 +52,13 @@ namespace OSVR
             private VRViewer[] _viewers;
             private uint _viewerCount;
             private bool _displayConfigInitialized = false;
-            private bool _checkDisplayStartup = false;
             private uint _totalDisplayWidth;
             private uint _totalSurfaceHeight;
 
             //variables for controlling use of osvrUnityRenderingPlugin.dll which enables DirectMode
             private OsvrRenderManager _renderManager;
             private bool _useRenderManager = false; //requires Unity 5.2+ and RenderManager configured osvr server
-            public bool UseRenderManager { get { return _useRenderManager; } }
- 
+            public bool UseRenderManager { get { return _useRenderManager; } set { _useRenderManager = value; } }
 
             public OSVR.ClientKit.DisplayConfig DisplayConfig
             {
@@ -70,6 +68,7 @@ namespace OSVR
             public VRViewer[] Viewers { get { return _viewers; } }
             public uint ViewerCount { get { return _viewerCount; } }
             public OsvrRenderManager RenderManager { get { return _renderManager; } }
+            public bool showDirectModePreview = true; //should the monitor show what the user sees in the HMD?
 
             public uint TotalDisplayWidth
             {
@@ -104,11 +103,9 @@ namespace OSVR
                 {
                     Debug.LogError("DisplayController requires a ClientKit object in the scene.");
                 }
-               
+                
                 SetupApplicationSettings();
-
             }
-  
 
             void SetupApplicationSettings()
             {
@@ -196,6 +193,18 @@ namespace OSVR
 
                 //create scene objects 
                 CreateHeadAndEyes();
+                SetRenderParams();
+            }
+
+            //Set RenderManager rendering parameters: near and far clip plane distance and IPD
+            private void SetRenderParams()
+            {
+                if (UseRenderManager && RenderManager != null)
+                {
+                    RenderManager.SetNearClippingPlaneDistance(Camera.main.nearClipPlane);
+                    RenderManager.SetFarClippingPlaneDistance(Camera.main.farClipPlane);
+                    //could set IPD as well
+                }
             }
 
             //Set Resolution of the Unity game window based on total surface width
@@ -246,7 +255,7 @@ namespace OSVR
                 VRViewer[] viewersInScene = FindObjectsOfType<VRViewer>();
                 if (viewersInScene != null && viewersInScene.Length > 0)
                 {
-                    for(viewerIndex = 0; viewerIndex < viewersInScene.Length; viewerIndex++)
+                    for (viewerIndex = 0; viewerIndex < viewersInScene.Length; viewerIndex++)
                     {
                         VRViewer viewer = viewersInScene[viewerIndex];
                         // get the VRViewer gameobject
@@ -262,7 +271,7 @@ namespace OSVR
                         vrViewer.transform.parent = this.transform; //child of DisplayController
                         vrViewer.transform.localPosition = Vector3.zero;
                         _viewers[viewerIndex] = viewer;
-                        if( viewerIndex == 0)
+                        if (viewerIndex == 0)
                         {
                             vrViewer.tag = "MainCamera"; //set the MainCamera tag for the first Viewer
                         }
@@ -270,7 +279,7 @@ namespace OSVR
                         // create Viewer's VREyes
                         uint eyeCount = (uint)_displayConfig.GetNumEyesForViewer(viewerIndex); //get the number of eyes for this viewer
                         viewer.CreateEyes(eyeCount);
-                    }         
+                    }
                 }
 
                 // loop through viewers because at some point we could support multiple viewers
@@ -279,11 +288,11 @@ namespace OSVR
                 {
                     // create a VRViewer
                     GameObject vrViewer = new GameObject("VRViewer" + viewerIndex);
-                    if(vrViewer.GetComponent<AudioListener>() == null)
+                    if (vrViewer.GetComponent<AudioListener>() == null)
                     {
-                        vrViewer.AddComponent<AudioListener>(); //add an audio listener
+                    vrViewer.AddComponent<AudioListener>(); //add an audio listener
                     }
-                    
+
                     VRViewer vrViewerComponent = vrViewer.AddComponent<VRViewer>();
                     vrViewerComponent.DisplayController = this; //pass DisplayController to Viewers  
                     vrViewerComponent.ViewerIndex = viewerIndex; //set the viewer's index                         
@@ -306,10 +315,6 @@ namespace OSVR
                 {
                     SetupDisplay();
                 }
-                if (!_checkDisplayStartup && _displayConfigInitialized)
-                {
-                    _checkDisplayStartup = DisplayConfig.CheckDisplayStartup();
-                }
             }
 
             //helper method for updating the client context
@@ -321,14 +326,16 @@ namespace OSVR
             public bool CheckDisplayStartup()
             {
                 return _displayConfigInitialized && DisplayConfig.CheckDisplayStartup();
-            }
+                }
 
-            internal void ExitRenderManager()
+            public void ExitRenderManager()
             {
-                RenderManager.ExitRenderManager();
+                if(UseRenderManager && RenderManager != null)
+                {
+                    RenderManager.ExitRenderManager();
+                    }
+                        }
+                    }
+                }
             }
-
-        }
-    }
-}
 

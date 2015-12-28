@@ -1,0 +1,44 @@
+<h1>OSVR Core System</h1>
+
+<blockquote><p>Maintained at <a href="https://github.com/OSVR/OSVR-Core">https://github.com/OSVR/OSVR-Core</a></p>
+
+<p>For details, see <a href="http://osvr.github.io">http://osvr.github.io</a></p>
+
+<p>For support, see <a href="http://support.osvr.com">http://support.osvr.com</a></p></blockquote>
+
+<p>This is the code and libraries to use when developing with OSVR.</p>
+
+<ul>
+<li>For developing plugins, you&rsquo;ll use the @ref PluginKit library.</li>
+<li>For developing applications using the framework, you&rsquo;ll use the @ref ClientKit library.</li>
+</ul>
+
+
+<h2>Binary Snapshot Documentation</h2>
+
+<p>If you&rsquo;re looking at this file in a binary build of OSVR-Core, please seen the <code>BINARY_README</code> file for more targeted information, as this main README file is focused on the source tree.</p>
+
+<h2>Source Documentation</h2>
+
+<p>See <a href="HACKING.md">the HACKING file</a> for some development guidelines for working on this code base itself.</p>
+
+<p>If you&rsquo;re looking at the source tree, not a binary snapshot, you may be interested in <a href="doc/Building.md">build docs</a>. You may also be interested in binary snapshots at <a href="http://osvr.github.io">http://osvr.github.io</a> .</p>
+
+<h2>License and Vendored Projects</h2>
+
+<p>This project: Licensed under the Apache License, Version 2.0.</p>
+
+<ul>
+<li><code>/cmake</code> - Git subtree from <a href="https://github.com/rpavlik/cmake-modules">https://github.com/rpavlik/cmake-modules</a> used at compile-time only. Primarily BSL 1.0, some items under the license used by CMake (BSD-style)</li>
+<li><code>/vendor/com_smart_pointer</code> - Header (for integrating <code>boost::intrusive_ptr</code> with MS COM) extracted from the following project and file: <a href="https://github.com/rengeln/nyx/blob/master/src/Prefix.h">https://github.com/rengeln/nyx/blob/master/src/Prefix.h</a>, modified as needed for compatibility. MIT license.</li>
+<li><code>/vendor/discount-windows-bins</code> - Submodule containing source, build script, and Windows binaries for the &ldquo;Discount&rdquo; Markdown processor, used only during the build process on Windows. Upstream at <a href="https://github.com/Orc/discount">https://github.com/Orc/discount</a>. 3-clause BSD license.</li>
+<li><code>/vendor/eigen-3.2.7</code> - Unpacked release from <a href="http://eigen.tuxfamily.org/">http://eigen.tuxfamily.org/</a> - header-only library under the MPL2 (a file-level copyleft, compatible with proprietary software), define <code>EIGEN_MPL2_ONLY</code> to exclude modules with other license from the build (done in OSVR-Core build system).</li>
+<li><code>/vendor/FloatExceptions</code> - Code for development use only, usage should not be committed or merged into master. MIT licensed.</li>
+<li><code>/vendor/gtest-1.7.0</code> - Unpacked source from <a href="https://code.google.com/p/googletest/">https://code.google.com/p/googletest/</a> - 3-clause BSD license. Used only for building/running tests.</li>
+<li><code>/vendor/jenkins-ctest-plugin</code> - Git submodule from <a href="https://github.com/rpavlik/jenkins-ctest-plugin">https://github.com/rpavlik/jenkins-ctest-plugin</a>, used only for building/running tests and CI. MIT license.</li>
+<li><code>/vendor/libcxx-backports</code> - C++11/14 standard library functionality backported into headers using the implementations from the libc++ project at <a href="http://libcxx.llvm.org/">http://libcxx.llvm.org/</a>. Dual licensed under <a href="http://llvm.org/docs/DeveloperPolicy.html#license">the MIT and the &ldquo;BSD-like&rdquo; UIUC license</a>.</li>
+<li><code>/vendor/UIforETWbins</code> - Distributed binary releases of UIforETW <a href="https://github.com/google/UIforETW">https://github.com/google/UIforETW</a> extracted to a Git repo (submodule) unmodified. Apache License, Version 2.0.</li>
+<li><code>/vendor/util-headers</code> - subset of headers installed from <a href="https://github.com/rpavlik/util-headers">https://github.com/rpavlik/util-headers</a>. BSL 1.0.</li>
+<li><code>/vendor/vrpn</code> - Git submodule, accessed from <a href="https://github.com/vrpn/vrpn">https://github.com/vrpn/vrpn</a>. BSL 1.0. Contains optional recursive submodules HIDAPI and libjsoncpp.</li>
+</ul>
+

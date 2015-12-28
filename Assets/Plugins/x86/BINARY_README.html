@@ -1,0 +1,72 @@
+<h1>OSVR Core System - Binary Snapshot Readme</h1>
+
+<blockquote><p>Maintained at <a href="https://github.com/OSVR/OSVR-Core">https://github.com/OSVR/OSVR-Core</a></p>
+
+<p>For details and more documentation, see <a href="http://osvr.github.io/contributing/#headingOSVR-Core">http://osvr.github.io/contributing/#headingOSVR-Core</a></p>
+
+<p>For support, see <a href="http://support.osvr.com">http://support.osvr.com</a></p></blockquote>
+
+<p>This is the code and libraries to use when developing with OSVR. It also includes the compiled run-time components, like OSVR Server.</p>
+
+<ul>
+<li>For developing plugins, you&rsquo;ll use the @ref PluginKit library.</li>
+<li>For developing applications using the framework, or for integrating OSVR with a game engine, you&rsquo;ll use the @ref ClientKit library.</li>
+<li>For developing applications with an existing engine integration, you&rsquo;ll want to see that integration&rsquo;s documentation, since this is a lower-level library than you&rsquo;ll likely have to interact with.</li>
+</ul>
+
+
+<h2>Files and Directories</h2>
+
+<p>Helper scripts, in the root directory of Windows builds:</p>
+
+<ul>
+<li><code>add_sdk_to_registry.{cmd,ps1}</code> - A convenience script for registering the location of an installed build with CMake, so that you can build plugins or applications against OSVR using CMake without having to manually specify the location of the OSVR-Core build. Optional, only used by developers directly using the OSVR-Core APIs in a C or C++ plugin or application. Not used by any game engine integration. <em>The <code>.cmd</code> file takes care of launching the PowerShell script (<code>.ps1</code> file) correctly. Just run the <code>.cmd</code> file as a regular user if you need this functionality.</em></li>
+</ul>
+
+
+<p>Version stamp files, in the root directory of automatically-built Windows snapshots:</p>
+
+<ul>
+<li><code>osvr-ver.txt</code> - the <code>git describe --tags</code> output of the OSVR-Core source tree used to build the snapshot.</li>
+<li><code>libfunctionality-ver.txt</code> - the <code>git describe --tags</code> output of the &ldquo;libfunctionality&rdquo; (a dependency of the server) source code used to build the snapshot.</li>
+</ul>
+
+
+<p>Documentation, etc.: in the root directory on Windows, and <code>share/doc/osvrcore</code> on other platforms:</p>
+
+<ul>
+<li><code>BINARY_README.{md,html}</code> - This file, in Markdown text and/or HTML format.</li>
+<li><code>CONTRIBUTING.{md,html}</code> - the Contributing Guidelines from the source, in Markdown text and/or HTML format.</li>
+<li><code>NEWS.{md,html}</code> - An abbreviated log of breaking changes, in Markdown text and/or HTML format.</li>
+<li><code>README.{md,html}</code> - The README file from the source tree, in Markdown text and/or HTML format.</li>
+<li><code>NOTICE</code> and <code>LICENSE</code> - Files related to the Apache License v2.0</li>
+</ul>
+
+
+<p>In automatically-built Windows snapshots:</p>
+
+<ul>
+<li><code>tracing/</code> directory - Contains ETW tracing-enabled binaries, see the README in that directory for more information.</li>
+</ul>
+
+
+<p>In all installed builds:</p>
+
+<ul>
+<li><code>bin/</code> directory - Contains most-commonly-used executables, including <code>osvr_server</code> and tools like <code>osvr_print_tree</code>. On Windows, also contains the shared library (<code>.dll</code>) files.</li>
+<li><code>osvr-plugins-0/</code> directory, under <code>bin/</code> on Windows and under the library directory (often <code>lib/</code>) on other platforms - Contains the installed plugins bundled with OSVR-Core. Those whose filename ends in <code>.manualload</code> must be explicitly specified in a config file to be loaded; all others automatically load. <em>Place any additional plugins here</em>, with any of their required shared-library dependencies (<code>.dll</code>/<code>.so</code>/<code>.dylib</code>) alongside the OSVR shared libraries (in <code>bin/</code> or the library directory, depending on platform)</li>
+<li><code>share/doc/osvrcore</code> directory - Contains example code, JSON schemas, JSON descriptors, and possibly documentation.</li>
+<li><code>share/osvrcore/extra-sample-apps</code> directory - Contains the additional sample applications compiled but not placed in <code>bin</code>. May need to be placed in <code>bin</code> to run correctly.</li>
+<li>Sample configs and descriptors: all under <code>bin/</code> on Windows, under <code>share/osvrcore/</code> on other platforms
+
+<ul>
+<li><code>osvr_server_config.json</code> - Default config file, for fully-auto-detected configurations such as the OSVR HDK.</li>
+<li><code>sample-configs/</code> directory - Sample server config files.</li>
+<li><code>external-devices/</code> directory - Sample server config files and device descriptors (in the <code>device-descriptors/</code> subdirectory) for using VRPN-supported devices with OSVR.</li>
+<li><code>displays/</code> directory - Display descriptors for a variety of HMDs, to reference from server config files.</li>
+</ul>
+</li>
+<li><code>lib/</code> or a similar directory (may vary in multiarch Linux distributions) - On Windows, contains the import libraries used by MS Visual C++ to link against the DLLs. On other platforms, contains the shared libraries themselves. On all platforms, contains any static libraries distributed with OSVR, as well as CMake config filfes.</li>
+<li><code>include/</code> directory - Contains the OSVR header files. Note that all headers, not just those of the &ldquo;public&rdquo; or &ldquo;external&rdquo; APIs, are included by default for convenience, and may typically be ignored.</li>
+</ul>
+
