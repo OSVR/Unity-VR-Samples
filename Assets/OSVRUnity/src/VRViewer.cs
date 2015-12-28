@@ -25,7 +25,7 @@ namespace OSVR
 {
     namespace Unity
     {
-        [RequireComponent(typeof(Camera))]   
+        [RequireComponent(typeof(Camera))]  
         public class VRViewer : MonoBehaviour
         {   
             #region Public Variables         
@@ -35,16 +35,6 @@ namespace OSVR
             public uint ViewerIndex { get { return _viewerIndex; } set { _viewerIndex = value; } }
             [HideInInspector]
             public Transform cachedTransform;
-            #endregion
-
-            #region Private Variables
-            private DisplayController _displayController;
-            private VREye[] _eyes;
-            private uint _eyeCount;
-            private uint _viewerIndex;
-
-            private Camera _camera;
-            private bool _disabledCamera = true;
             public Camera Camera
             {
                 get
@@ -57,6 +47,16 @@ namespace OSVR
                 }
                 set { _camera = value; }
             }
+            #endregion
+
+            #region Private Variables
+            private DisplayController _displayController;
+            private VREye[] _eyes;
+            private uint _eyeCount;
+            private uint _viewerIndex;
+            private Camera _camera;
+            private bool _disabledCamera = true;
+            
 
             #endregion
 
@@ -67,14 +67,15 @@ namespace OSVR
 
             void Init()
             {
-                //cache:
                 _camera = GetComponent<Camera>();
+                //cache:
                 cachedTransform = transform;
-                if(DisplayController == null)
+                if (DisplayController == null)
                 {
                     DisplayController = FindObjectOfType<DisplayController>();
                 }
             }
+
             void OnEnable()
             {
                 StartCoroutine("EndOfFrame");
@@ -88,7 +89,6 @@ namespace OSVR
                     DisplayController.ExitRenderManager();
                 }
             }
-
 
             //Creates the Eyes of this Viewer
             public void CreateEyes(uint eyeCount)
@@ -115,7 +115,6 @@ namespace OSVR
                 return DisplayController.DisplayConfig.GetViewerPose(viewerIndex);
             }
 
-
             //Updates the position and rotation of the head
             public void UpdateViewerHeadPose(OSVR.ClientKit.Pose3 headPose)
             {
@@ -132,7 +131,8 @@ namespace OSVR
 #if UNITY_5_2 || UNITY_5_3
                     GL.IssuePluginEvent(DisplayController.RenderManager.GetRenderEventFunction(), OsvrRenderManager.UPDATE_RENDERINFO_EVENT);
 #else
-                    Debug.LogError("GL.IssuePluginEvent failed. This version of Unity is not supported by RenderManager.");
+                    Debug.LogError("GL.IssuePluginEvent failed. This version of Unity cannot support RenderManager.");
+                    DisplayController.UseRenderManager = false;
 #endif
                 }
                 else
@@ -144,6 +144,7 @@ namespace OSVR
                 {                   
                     //update the eye pose
                     VREye eye = Eyes[eyeIndex];
+
                     if (DisplayController.UseRenderManager)
                     { 
                         //get eye pose from RenderManager                     
@@ -161,7 +162,6 @@ namespace OSVR
                 }
             }
 
-
             //helper method for updating the client context
             public void UpdateClient()
             {
@@ -175,9 +175,20 @@ namespace OSVR
             // OnPreRender is not called because we disable the camera here.
             void OnPreCull()
             {
-                // Disable dummy camera during rendering
-                // Enable after frame ends
-                _camera.enabled = true;
+                
+                if(!DisplayController.CheckDisplayStartup())
+                {
+                    //leave this preview camera enabled if there is no display config
+                    _camera.enabled = true;
+                }
+                else
+                {
+                    // To save Render time, disable this camera here and re-enable after the frame
+                    // OR, in DirectMode, leave it on for "mirror" mode, although this is an expensive operation
+                    // The long-term solution is to provide a DirectMode preview window in RenderManager
+                    //@todo enable directmode preview in RenderManager
+                    _camera.enabled = DisplayController.UseRenderManager && DisplayController.showDirectModePreview;
+                }
 
                 DoRendering();
 
@@ -229,12 +240,13 @@ namespace OSVR
 #if UNITY_5_2 || UNITY_5_3
                         GL.IssuePluginEvent(DisplayController.RenderManager.GetRenderEventFunction(), OsvrRenderManager.RENDER_EVENT);
 #else
-                        Debug.LogError("GL.IssuePluginEvent failed. This version of Unity is not supported by RenderManager.");
+                        Debug.LogError("GL.IssuePluginEvent failed. This version of Unity cannot support RenderManager.");
+                        DisplayController.UseRenderManager = false;
 #endif
                     }
 
                 }
-            }
+            }             
         }
     }
 }

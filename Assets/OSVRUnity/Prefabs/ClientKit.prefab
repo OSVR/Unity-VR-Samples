@@ -36,10 +36,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 136198}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 195910cc18bf09545ae62b0dcf57b554, type: 3}
+  m_Script: {fileID: 11500000, guid: e2550bc6af558044baf4aa2ee88d5e8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AppID: com.unity.osvr
+  AppID: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -51,3 +51,4 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 136198}
   m_IsPrefabParent: 1
+  m_IsExploded: 1
