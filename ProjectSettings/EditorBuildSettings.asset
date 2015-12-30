@@ -5,18 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/VRSampleScenes/Scenes/Intro.unity
-  - enabled: 0
-    path: Assets/VRSampleScenes/Scenes/MainMenu.unity
-  - enabled: 0
-    path: Assets/VRSampleScenes/Scenes/Maze.unity
-  - enabled: 0
-    path: Assets/VRSampleScenes/Scenes/Flyer.unity
-  - enabled: 0
-    path: Assets/VRSampleScenes/Scenes/Shooter360.unity
-  - enabled: 0
-    path: Assets/VRSampleScenes/Scenes/Shooter180.unity
   - enabled: 1
     path: Assets/Scenes/Intro_OSVR.unity
   - enabled: 1
