@@ -2,7 +2,7 @@
 
 This project demonstrates OSVR integration with the [Unity VR Samples project](https://www.assetstore.unity3d.com/#!/content/51519) available on the Unity Asset Store as of the Unity 5.3 release.
 
-Using OSVR-Unity version: v0.6.3
+Using OSVR-Unity-v0.6.3.10-gec2d6ed (build number 276) with OSVR-Core v0.6-740 and RenderManager v0.6.34
 
 To convert the scenes to be OSVR compatible, the following steps were taken:
 
