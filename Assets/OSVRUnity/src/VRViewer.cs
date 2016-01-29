@@ -95,18 +95,66 @@ namespace OSVR
             {
                 _eyeCount = eyeCount; //cache the number of eyes this viewer controls
                 _eyes = new VREye[_eyeCount];
-                for (uint eyeIndex = 0; eyeIndex < _eyeCount; eyeIndex++)
+
+                uint eyeIndex = 0;
+                uint foundEyes = 0;
+
+                //Check if there are already VREyes in the scene.
+                //If so, use them instead of creating a new 
+                VREye[] eyesInScene = FindObjectsOfType<VREye>();
+                foundEyes = (uint)eyesInScene.Length;
+                if (eyesInScene != null && foundEyes > 0)
                 {
-                    GameObject eyeGameObject = new GameObject("Eye" + eyeIndex); //add an eye gameobject to the scene
-                    VREye eye = eyeGameObject.AddComponent<VREye>(); //add the VReye component
-                    eye.Viewer = this; //ASSUME THERE IS ONLY ONE VIEWER
-                    eye.EyeIndex = eyeIndex; //set the eye's index
-                    eyeGameObject.transform.parent = DisplayController.transform; //child of DisplayController
-                    eyeGameObject.transform.localPosition = Vector3.zero;
-                    eyeGameObject.transform.rotation = this.transform.rotation;
-                    _eyes[eyeIndex] = eye;
-                    uint eyeSurfaceCount = DisplayController.DisplayConfig.GetNumSurfacesForViewerEye(ViewerIndex, (byte)eyeIndex);
-                    eye.CreateSurfaces(eyeSurfaceCount);
+                    for (eyeIndex = 0; eyeIndex < eyesInScene.Length; eyeIndex++)
+                    {
+                        VREye eye = eyesInScene[eyeIndex];
+                        // get the VREye gameobject
+                        GameObject eyeGameObject = eye.gameObject;
+                        eyeGameObject.name = "VREye" + eyeIndex;
+                        eye.Viewer = this; 
+                        eye.EyeIndex = eyeIndex; //set the eye's index
+                        eyeGameObject.transform.parent = DisplayController.transform; //child of DisplayController
+                        eyeGameObject.transform.localPosition = Vector3.zero;
+                        eyeGameObject.transform.rotation = this.transform.rotation;
+                        _eyes[eyeIndex] = eye;
+                        uint eyeSurfaceCount = DisplayController.DisplayConfig.GetNumSurfacesForViewerEye(ViewerIndex, (byte)eyeIndex);
+                        eye.CreateSurfaces(eyeSurfaceCount);
+                    }
+                }
+
+                for (; eyeIndex < _eyeCount; eyeIndex++)
+                {
+                    if(foundEyes == 0)
+                    {
+                        GameObject eyeGameObject = new GameObject("Eye" + eyeIndex); //add an eye gameobject to the scene
+                        VREye eye = eyeGameObject.AddComponent<VREye>(); //add the VReye component
+                        eye.Viewer = this; //ASSUME THERE IS ONLY ONE VIEWER
+                        eye.EyeIndex = eyeIndex; //set the eye's index
+                        eyeGameObject.transform.parent = DisplayController.transform; //child of DisplayController
+                        eyeGameObject.transform.localPosition = Vector3.zero;
+                        eyeGameObject.transform.rotation = this.transform.rotation;
+                        _eyes[eyeIndex] = eye;
+                        //create the eye's rendering surface
+                        uint eyeSurfaceCount = DisplayController.DisplayConfig.GetNumSurfacesForViewerEye(ViewerIndex, (byte)eyeIndex);
+                        eye.CreateSurfaces(eyeSurfaceCount);
+                    }
+                    else
+                    {
+                        //if we need to create a new VREye, and there is already one in the scene (eyeIndex > 0), 
+                        //duplicate the last eye found instead of creating new gameobjects
+                        GameObject eyeGameObject = (GameObject)Instantiate(_eyes[eyeIndex - 1].gameObject);
+                        VREye eye = eyeGameObject.GetComponent<VREye>(); //add the VReye component
+                        eye.Viewer = this; //ASSUME THERE IS ONLY ONE VIEWER
+                        eye.EyeIndex = eyeIndex; //set the eye's index
+                        eyeGameObject.name = "VREye" + eyeIndex;
+                        eyeGameObject.transform.parent = DisplayController.transform; //child of DisplayController
+                        eyeGameObject.transform.localPosition = Vector3.zero;
+                        eyeGameObject.transform.rotation = this.transform.rotation;
+                        _eyes[eyeIndex] = eye;
+                        uint eyeSurfaceCount = DisplayController.DisplayConfig.GetNumSurfacesForViewerEye(ViewerIndex, (byte)eyeIndex);
+                        eye.CreateSurfaces(eyeSurfaceCount);
+                    }
+                    
                 }
             }
 
@@ -129,7 +177,7 @@ namespace OSVR
                 if (DisplayController.UseRenderManager)
                 {
                     //Update RenderInfo
-#if UNITY_5_2 || UNITY_5_3
+#if UNITY_5_2 || UNITY_5_3 || UNITY_5_4
                     GL.IssuePluginEvent(DisplayController.RenderManager.GetRenderEventFunction(), OsvrRenderManager.UPDATE_RENDERINFO_EVENT);
 #else
                     Debug.LogError("GL.IssuePluginEvent failed. This version of Unity cannot support RenderManager.");
@@ -220,7 +268,7 @@ namespace OSVR
                     if (DisplayController.UseRenderManager && DisplayController.CheckDisplayStartup())
                     {
                         // Issue a RenderEvent, which copies Unity RenderTextures to RenderManager buffers
-#if UNITY_5_2 || UNITY_5_3
+#if UNITY_5_2 || UNITY_5_3 || UNITY_5_4
                         GL.Clear(false, true, Camera.backgroundColor);
                         GL.IssuePluginEvent(DisplayController.RenderManager.GetRenderEventFunction(), OsvrRenderManager.RENDER_EVENT); 
                         if(DisplayController.showDirectModePreview)
