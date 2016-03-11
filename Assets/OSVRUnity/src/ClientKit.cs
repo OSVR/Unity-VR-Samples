@@ -113,7 +113,7 @@ namespace OSVR
                 if(_instance == null)
                 {
                     _instance = this;
-                    DontDestroyOnLoad(this);
+					DontDestroyOnLoad(this);
                 }
                 else
                 {
@@ -149,12 +149,17 @@ namespace OSVR
             }
 			
             void Stop()
-            {
-                if (null != _contextObject)
+        {
+                // Only stop the main instance, since it is the only one that
+                // ever actually starts-up.
+                if (this == instance)
                 {
-                    Debug.Log("[OSVR-Unity] Shutting down OSVR.");
-                    _contextObject.Dispose();
-                    _contextObject = null;
+                    if (null != _contextObject)
+                    {
+                        Debug.Log("[OSVR-Unity] Shutting down OSVR.");
+                        _contextObject.Dispose();
+                        _contextObject = null;
+                    }
                 }
             }
 
