@@ -74,6 +74,10 @@ namespace OSVR
             [DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
             private static extern Byte CreateRenderManagerFromUnity(OSVR.ClientKit.SafeClientContextHandle /*OSVR_ClientContext*/ ctx);
 
+            //Create and Register RenderBuffers
+            [DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
+            private static extern Byte ConstructRenderBuffers();
+
             [StructLayout(LayoutKind.Sequential)]
             public struct OSVR_ViewportDescription
             {
@@ -107,8 +111,6 @@ namespace OSVR
             [DllImport(PluginName, CallingConvention = CallingConvention.Cdecl)]
             private static extern void ShutdownRenderManager();
 
-            private OSVR.ClientKit.ClientContext _renderManagerClientContext;
-            private ClientKit _clientKit;
             private bool _linkDebug = false; //causes crash on exit if true, only enable for debugging
 
             //Initialize use of RenderManager via CreateRenderManager call
@@ -120,10 +122,15 @@ namespace OSVR
                     //only use for debugging purposes, do not leave on for release.
                     LinkDebug(functionPointer); // Hook our c++ plugin into Unity's console log.
                 }
-                _clientKit = ClientKit.instance;
-                //create a client context for RenderManager. This context should not be updated from Unity.
-                _renderManagerClientContext = new OSVR.ClientKit.ClientContext("com.sensics.rendermanagercontext", 0);
-                return CreateRenderManager(_renderManagerClientContext);
+
+                return CreateRenderManager(ClientKit.instance.context);
+            }
+
+            //Create and Register RenderBuffers in RenderManager
+            //Called after RM is created and after Unity RenderTexture's are created and assigned via SetEyeColorBuffer
+            public int ConstructBuffers()
+            {
+                return ConstructRenderBuffers();
             }
 
             public void SetNearClippingPlaneDistance(float near)
@@ -145,7 +152,7 @@ namespace OSVR
             public void SetRoomRotationUsingHead()
             {
 #if UNITY_5_2 || UNITY_5_3 || UNITY_5_4
-                _clientKit.context.SetRoomRotationUsingHead();
+                ClientKit.instance.context.SetRoomRotationUsingHead();
                 GL.IssuePluginEvent(GetRenderEventFunc(), 3);
 #endif
             }
@@ -154,7 +161,7 @@ namespace OSVR
             public void ClearRoomToWorldTransform()
             {
 #if UNITY_5_2 || UNITY_5_3 || UNITY_5_4
-                _clientKit.context.ClearRoomToWorldTransform();
+                ClientKit.instance.context.ClearRoomToWorldTransform();
                 GL.IssuePluginEvent(GetRenderEventFunc(), 4);
 #endif
             }
@@ -250,11 +257,6 @@ namespace OSVR
             public void ExitRenderManager()
             {
                 ShutdownRenderManager();
-                if (null != _renderManagerClientContext)
-                {
-                    _renderManagerClientContext.Dispose();
-                    _renderManagerClientContext = null;
-                }
             }
 
             //helper functions to determine is RenderManager is supported
