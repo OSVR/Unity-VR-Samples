@@ -7,13 +7,15 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Intro_OSVR.unity
+  - enabled: 0
+    path: Assets/Scenes/MainMenu_OSVR_noshooter.unity
   - enabled: 1
     path: Assets/Scenes/MainMenu_OSVR.unity
   - enabled: 1
     path: Assets/Scenes/Flyer_OSVR.unity
   - enabled: 1
     path: Assets/Scenes/Maze_OSVR.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Shooter180_OSVR.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Shooter360_OSVR.unity
