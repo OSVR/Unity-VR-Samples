@@ -39,7 +39,7 @@ namespace OSVR
                 _displayController = FindObjectOfType<DisplayController>();
             }
 
-            void FixedUpdate()
+            void Update()
             {
                 if (Input.GetKeyDown(setRoomRotationKey))
                 {                   
@@ -50,7 +50,10 @@ namespace OSVR
                     }
                     else
                     {
-                        _clientKit.context.SetRoomRotationUsingHead();
+                        if(_clientKit.context.CheckStatus())
+                        {
+                            _clientKit.context.SetRoomRotationUsingHead();
+                        }
                     }
                 }
                 if (Input.GetKeyDown(clearRoomRotationKey))
