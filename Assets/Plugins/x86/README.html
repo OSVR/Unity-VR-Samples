@@ -28,17 +28,20 @@
 
 <p>This project: Licensed under the Apache License, Version 2.0.</p>
 
+<p>Some directories under <code>/vendor</code> are in fact not external libraries vendored-in, but &ldquo;internally-vendored&rdquo; - developed as a part of OSVR-Core, and likewise licensed under the Apache License 2.0, but are logically distinct from the Core in their functionality and are thus kept separate in anticipation of potential splitting off into a separate project at some future point. These include <code>/vendor/comutils</code> and <code>/vendor/dummy-sal</code>.</p>
+
 <ul>
 <li><code>/cmake</code> - Git subtree from <a href="https://github.com/rpavlik/cmake-modules">https://github.com/rpavlik/cmake-modules</a> used at compile-time only. Primarily BSL 1.0, some items under the license used by CMake (BSD-style)</li>
 <li><code>/vendor/com_smart_pointer</code> - Header (for integrating <code>boost::intrusive_ptr</code> with MS COM) extracted from the following project and file: <a href="https://github.com/rengeln/nyx/blob/master/src/Prefix.h">https://github.com/rengeln/nyx/blob/master/src/Prefix.h</a>, modified as needed for compatibility. MIT license.</li>
 <li><code>/vendor/discount-windows-bins</code> - Submodule containing source, build script, and Windows binaries for the &ldquo;Discount&rdquo; Markdown processor, used only during the build process on Windows. Upstream at <a href="https://github.com/Orc/discount">https://github.com/Orc/discount</a>. 3-clause BSD license.</li>
-<li><code>/vendor/eigen-3.2.7</code> - Unpacked release from <a href="http://eigen.tuxfamily.org/">http://eigen.tuxfamily.org/</a> - header-only library under the MPL2 (a file-level copyleft, compatible with proprietary software), define <code>EIGEN_MPL2_ONLY</code> to exclude modules with other license from the build (done in OSVR-Core build system).</li>
-<li><code>/vendor/FloatExceptions</code> - Code for development use only, usage should not be committed or merged into master. MIT licensed.</li>
+<li><code>/vendor/eigen</code> - Unpacked release from <a href="http://eigen.tuxfamily.org/">http://eigen.tuxfamily.org/</a> - header-only library under the MPL2 (a file-level copyleft, compatible with proprietary software), define <code>EIGEN_MPL2_ONLY</code> to exclude modules with other license from the build (done in OSVR-Core build system).</li>
+<li><code>/vendor/FloatExceptions</code> - Modified code (<a href="http://randomascii.wordpress.com/2012/04/21/exceptional-floating-point/">original author: Bruce Dawson</a> for development use only, usage should not be committed or merged into master. MIT licensed.</li>
+<li><code>/vendor/folly</code> - Submodule of <a href="https://github.com/facebook/folly">C++11 components originally developed and widely used at Facebook</a>. Apache License, Version 2.0.</li>
 <li><code>/vendor/gtest-1.7.0</code> - Unpacked source from <a href="https://code.google.com/p/googletest/">https://code.google.com/p/googletest/</a> - 3-clause BSD license. Used only for building/running tests.</li>
 <li><code>/vendor/jenkins-ctest-plugin</code> - Git submodule from <a href="https://github.com/rpavlik/jenkins-ctest-plugin">https://github.com/rpavlik/jenkins-ctest-plugin</a>, used only for building/running tests and CI. MIT license.</li>
 <li><code>/vendor/libcxx-backports</code> - C++11/14 standard library functionality backported into headers using the implementations from the libc++ project at <a href="http://libcxx.llvm.org/">http://libcxx.llvm.org/</a>. Dual licensed under <a href="http://llvm.org/docs/DeveloperPolicy.html#license">the MIT and the &ldquo;BSD-like&rdquo; UIUC license</a>.</li>
 <li><code>/vendor/UIforETWbins</code> - Distributed binary releases of UIforETW <a href="https://github.com/google/UIforETW">https://github.com/google/UIforETW</a> extracted to a Git repo (submodule) unmodified. Apache License, Version 2.0.</li>
-<li><code>/vendor/util-headers</code> - subset of headers installed from <a href="https://github.com/rpavlik/util-headers">https://github.com/rpavlik/util-headers</a>. BSL 1.0.</li>
+<li><code>/vendor/util-headers</code> - Subset of headers installed from <a href="https://github.com/rpavlik/util-headers">https://github.com/rpavlik/util-headers</a>. BSL 1.0.</li>
 <li><code>/vendor/vrpn</code> - Git submodule, accessed from <a href="https://github.com/vrpn/vrpn">https://github.com/vrpn/vrpn</a>. BSL 1.0. Contains optional recursive submodules HIDAPI and libjsoncpp.</li>
 </ul>
 
