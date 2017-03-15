@@ -1,10 +1,11 @@
 fileFormatVersion: 2
-guid: 5873c4718c1455d46ab0a57b5af57d96
+guid: 2ae1102355567bb4086d283d84ea84dd
 PluginImporter:
   serializedVersion: 1
   iconMap: {}
   executionOrder: {}
   isPreloaded: 0
+  isOverridable: 0
   platformData:
     Android:
       enabled: 1
