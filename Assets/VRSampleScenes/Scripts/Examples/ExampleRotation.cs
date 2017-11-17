@@ -25,8 +25,7 @@ namespace VRStandardAssets.Examples
             // Set the rotation to be the same as the user's in the y axis.
             eulerRotation.x = 0;
             eulerRotation.z = 0;
-            //eulerRotation.y = InputTracking.GetLocalRotation(VRNode.Head).eulerAngles.y;
-            eulerRotation.y = Camera.main.transform.eulerAngles.y;
+            eulerRotation.y = InputTracking.GetLocalRotation(VRNode.Head).eulerAngles.y;
 
             // Add 360 to the rotation so that it can effectively be clamped.
             if (eulerRotation.y < 270)

@@ -1,19 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
-SceneSettings:
+OcclusionCullingSettings:
   m_ObjectHideFlags: 0
-  m_PVSData: 
-  m_PVSObjectsArray: []
-  m_PVSPortalsArray: []
+  serializedVersion: 2
   m_OcclusionBakeSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 6
+  serializedVersion: 8
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -25,6 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 1
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -37,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 8900000, guid: 78fde74ca5520cb4b979933655a20804, type: 3}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 6
+  serializedVersion: 9
   m_GIWorkflowMode: 1
-  m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -53,38 +54,60 @@ LightmapSettings:
     m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
-    serializedVersion: 3
+    serializedVersion: 8
     m_Resolution: 4
     m_BakeResolution: 5
     m_TextureWidth: 1024
     m_TextureHeight: 1024
+    m_AO: 1
     m_AOMaxDistance: 1
-    m_Padding: 2
     m_CompAOExponent: 0.5
+    m_CompAOExponentDirect: 0
+    m_Padding: 2
     m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
     m_TextureCompression: 1
     m_FinalGather: 0
+    m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 112000001, guid: 4797d9ac8d782024e85abf32cb456deb,
+    m_MixedBakeMode: 1
+    m_BakeBackend: 0
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 500
+    m_PVRBounces: 2
+    m_PVRFiltering: 0
+    m_PVRFilteringMode: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousColorSigma: 1
+    m_PVRFilteringAtrousNormalSigma: 1
+    m_PVRFilteringAtrousPositionSigma: 1
+  m_LightingDataAsset: {fileID: 112000002, guid: 4797d9ac8d782024e85abf32cb456deb,
     type: 2}
-  m_RuntimeCPUUsage: 25
+  m_ShadowMaskMode: 2
 --- !u!196 &5
 NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
     serializedVersion: 2
+    agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
-    accuratePlacement: 0
     minRegionArea: 2
-    cellSize: 0.16666667
     manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1001 &26198432
 Prefab:
@@ -137,10 +160,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 163866254}
-  - 114: {fileID: 163866253}
+  - component: {fileID: 163866254}
+  - component: {fileID: 163866253}
   m_Layer: 0
   m_Name: ShootingGalleryController
   m_TagString: Untagged
@@ -189,14 +212,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1734132204}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &214410057
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 214410058}
+  - component: {fileID: 214410058}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -217,16 +241,17 @@ Transform:
   - {fileID: 1685882608}
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &287349190
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 287349191}
-  - 222: {fileID: 287349193}
-  - 114: {fileID: 287349192}
+  - component: {fileID: 287349191}
+  - component: {fileID: 287349193}
+  - component: {fileID: 287349192}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -246,6 +271,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 930569733}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -0.00000047683716}
@@ -466,11 +492,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 455849486}
-  - 222: {fileID: 455849488}
-  - 114: {fileID: 455849487}
+  - component: {fileID: 455849486}
+  - component: {fileID: 455849488}
+  - component: {fileID: 455849487}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -490,6 +516,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 745474207}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -2.9}
@@ -545,12 +572,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 629652492}
-  - 114: {fileID: 629652491}
-  - 114: {fileID: 629652490}
-  - 114: {fileID: 629652489}
+  - component: {fileID: 629652492}
+  - component: {fileID: 629652491}
+  - component: {fileID: 629652490}
+  - component: {fileID: 629652489}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -614,16 +641,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1734132204}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &698702692
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 698702693}
-  - 222: {fileID: 698702695}
-  - 114: {fileID: 698702694}
+  - component: {fileID: 698702693}
+  - component: {fileID: 698702695}
+  - component: {fileID: 698702694}
   m_Layer: 5
   m_Name: Body
   m_TagString: Untagged
@@ -643,6 +671,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 930569733}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -17.44}
@@ -692,11 +721,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 704125829}
-  - 222: {fileID: 704125831}
-  - 114: {fileID: 704125830}
+  - component: {fileID: 704125829}
+  - component: {fileID: 704125831}
+  - component: {fileID: 704125830}
   m_Layer: 5
   m_Name: HighScoreText
   m_TagString: Untagged
@@ -716,6 +745,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 745474207}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -2.9}
@@ -765,10 +795,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 707436988}
-  - 114: {fileID: 707436989}
+  - component: {fileID: 707436988}
+  - component: {fileID: 707436989}
   m_Layer: 0
   m_Name: TargetObjectPool
   m_TagString: Untagged
@@ -788,6 +818,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1734132204}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &707436989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -807,13 +838,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 745474207}
-  - 223: {fileID: 745474210}
-  - 114: {fileID: 745474209}
-  - 225: {fileID: 745474208}
-  - 114: {fileID: 745474211}
+  - component: {fileID: 745474207}
+  - component: {fileID: 745474210}
+  - component: {fileID: 745474209}
+  - component: {fileID: 745474208}
+  - component: {fileID: 745474211}
   m_Layer: 5
   m_Name: OutroCanvas
   m_TagString: Untagged
@@ -839,6 +870,7 @@ RectTransform:
   - {fileID: 1369458547}
   m_Father: {fileID: 1494584179}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 1.04}
@@ -883,7 +915,7 @@ Canvas:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 745474206}
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -891,6 +923,8 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -924,13 +958,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 930569733}
-  - 223: {fileID: 930569736}
-  - 114: {fileID: 930569735}
-  - 225: {fileID: 930569734}
-  - 114: {fileID: 930569737}
+  - component: {fileID: 930569733}
+  - component: {fileID: 930569736}
+  - component: {fileID: 930569735}
+  - component: {fileID: 930569734}
+  - component: {fileID: 930569737}
   m_Layer: 5
   m_Name: IntroCanvas
   m_TagString: Untagged
@@ -952,6 +986,7 @@ RectTransform:
   - {fileID: 698702693}
   m_Father: {fileID: 1494584179}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 1.11}
@@ -996,7 +1031,7 @@ Canvas:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 930569732}
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -1004,6 +1039,8 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1027,11 +1064,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 964035313}
-  - 222: {fileID: 964035315}
-  - 114: {fileID: 964035314}
+  - component: {fileID: 964035313}
+  - component: {fileID: 964035315}
+  - component: {fileID: 964035314}
   m_Layer: 5
   m_Name: Body
   m_TagString: Untagged
@@ -1051,6 +1088,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 745474207}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -30.5}
@@ -1112,6 +1150,8 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 843fe35f74533134fbfee4ab90c138a8, type: 3}
 --- !u!114 &1042604709 stripped
 MonoBehaviour:
@@ -1208,7 +1248,7 @@ Prefab:
       objectReference: {fileID: 319848124}
     - target: {fileID: 22442236, guid: 863a0315eb7aa5349ba3dd88bfdbc120, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22493394, guid: 863a0315eb7aa5349ba3dd88bfdbc120, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -1305,10 +1345,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1176611589}
-  - 114: {fileID: 1176611588}
+  - component: {fileID: 1176611589}
+  - component: {fileID: 1176611588}
   m_Layer: 0
   m_Name: UIController
   m_TagString: Untagged
@@ -1344,16 +1384,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1734132204}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1369458546
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 1369458547}
-  - 222: {fileID: 1369458549}
-  - 114: {fileID: 1369458548}
+  - component: {fileID: 1369458547}
+  - component: {fileID: 1369458549}
+  - component: {fileID: 1369458548}
   m_Layer: 5
   m_Name: HighScoreResultText
   m_TagString: Untagged
@@ -1373,6 +1414,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 745474207}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 20.9, y: -12.67}
@@ -1422,12 +1464,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1494584179}
-  - 114: {fileID: 1494584181}
-  - 114: {fileID: 1494584180}
-  - 114: {fileID: 1494584182}
+  - component: {fileID: 1494584179}
+  - component: {fileID: 1494584181}
+  - component: {fileID: 1494584180}
+  - component: {fileID: 1494584182}
   m_Layer: 0
   m_Name: GameGUI
   m_TagString: Untagged
@@ -1450,6 +1492,7 @@ Transform:
   - {fileID: 1153307604}
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1494584180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1513,15 +1556,17 @@ MeshCollider:
   m_Enabled: 0
   serializedVersion: 2
   m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 04f6fcdb8fb54e24599e1b6a0c6b7dee, type: 3}
 --- !u!1 &1537672804
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1537672805}
+  - component: {fileID: 1537672805}
   m_Layer: 12
   m_Name: Background
   m_TagString: Untagged
@@ -1544,14 +1589,15 @@ Transform:
   - {fileID: 1808013468}
   m_Father: {fileID: 0}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1554008086
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1554008087}
+  - component: {fileID: 1554008087}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -1571,6 +1617,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1734132204}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1598769860 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11401468, guid: 863a0315eb7aa5349ba3dd88bfdbc120,
@@ -1582,11 +1629,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 1600330415}
-  - 222: {fileID: 1600330414}
-  - 114: {fileID: 1600330413}
+  - component: {fileID: 1600330415}
+  - component: {fileID: 1600330414}
+  - component: {fileID: 1600330413}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -1645,6 +1692,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 745474207}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 10.06}
@@ -1655,11 +1703,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 1604719506}
-  - 222: {fileID: 1604719508}
-  - 114: {fileID: 1604719507}
+  - component: {fileID: 1604719506}
+  - component: {fileID: 1604719508}
+  - component: {fileID: 1604719507}
   m_Layer: 5
   m_Name: ScoreResultText
   m_TagString: Untagged
@@ -1679,6 +1727,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 745474207}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -18.2, y: -12.67}
@@ -1728,10 +1777,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1685882608}
-  - 82: {fileID: 1685882609}
+  - component: {fileID: 1685882608}
+  - component: {fileID: 1685882609}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -1751,6 +1800,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 214410058}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1685882609
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1768,6 +1818,7 @@ AudioSource:
   Loop: 1
   Mute: 0
   Spatialize: 0
+  SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -1780,12 +1831,14 @@ AudioSource:
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: 1
+    - serializedVersion: 2
+      time: 1
       value: 0
       inSlope: 0
       outSlope: 0
@@ -1796,7 +1849,8 @@ AudioSource:
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
@@ -1807,7 +1861,8 @@ AudioSource:
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 0
       inSlope: 0
       outSlope: 0
@@ -1818,7 +1873,8 @@ AudioSource:
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
-    - time: 0
+    - serializedVersion: 2
+      time: 0
       value: 1
       inSlope: 0
       outSlope: 0
@@ -1831,9 +1887,9 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1734132204}
+  - component: {fileID: 1734132204}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -1858,6 +1914,7 @@ Transform:
   - {fileID: 1176611589}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1808013467
 Prefab:
   m_ObjectHideFlags: 0

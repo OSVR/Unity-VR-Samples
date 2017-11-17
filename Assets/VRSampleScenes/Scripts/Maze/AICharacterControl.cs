@@ -1,13 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.AI;
 using VRStandardAssets.Maze;
 
-namespace UnityStandardAssets.Characters.ThirdPerson
+namespace VRStandardAssets.Maze
 {
-    [RequireComponent(typeof (NavMeshAgent))]
-    [RequireComponent(typeof (ThirdPersonCharacter))]
+    [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
+    [RequireComponent(typeof(ThirdPersonCharacter))]
     public class AICharacterControl : MonoBehaviour
     {
-        public NavMeshAgent agent { get; private set; }             // Navmesh agent required for the path finding
+        public UnityEngine.AI.NavMeshAgent agent { get; private set; }             // Navmesh agent required for the path finding
         public ThirdPersonCharacter character { get; private set; } // Character we are controlling
 
 
@@ -21,11 +22,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<NavMeshAgent>();
             character = GetComponent<ThirdPersonCharacter>();
-            m_Rigidbody = GetComponent<Rigidbody> ();
-            m_Player = GetComponent<Player> ();
+            m_Rigidbody = GetComponent<Rigidbody>();
+            m_Player = GetComponent<Player>();
 
-	        agent.updateRotation = false;
-	        agent.updatePosition = true;
+            agent.updateRotation = false;
+            agent.updatePosition = true;
 
             m_TargetPosition = transform.position;
         }
@@ -37,7 +38,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             if (agent.remainingDistance > agent.stoppingDistance)
             {
-                character.Move (agent.desiredVelocity, false, false);
+                character.Move(agent.desiredVelocity, false, false);
                 m_Rigidbody.isKinematic = false;
             }
             else

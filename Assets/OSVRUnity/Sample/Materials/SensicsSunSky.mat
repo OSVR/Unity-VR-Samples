@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SensicsSunSky
+  m_Shader: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _SUNDISK_NONE
+  m_LightmapFlags: 4
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: <noninit>
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: <noninit>
+      second: 0
+    - first:
+        name: _AtmosphereThickness
+      second: 1.486
+    - first:
+        name: _Exposure
+      second: 0.8
+    - first:
+        name: _SunDisk
+      second: 0
+    - first:
+        name: _SunSize
+      second: 0.04
+    m_Colors:
+    - first:
+        name: <noninit>
+      second: {r: 0, g: 2.0183642, b: 1e-45, a: -4.224415e+35}
+    - first:
+        name: _GroundColor
+      second: {r: 0.054901965, g: 0.14509805, b: 0.011764707, a: 1}
+    - first:
+        name: _SkyTint
+      second: {r: 0.098039225, g: 0.7725491, b: 1, a: 1}

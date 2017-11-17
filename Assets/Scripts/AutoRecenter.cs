@@ -31,6 +31,7 @@ namespace OSVR
         {
             private ClientKit _clientKit;
             private DisplayController _displayController;
+            private OsvrUnityNativeVR _vrController;
             private bool recentered = false;
 
             void Awake()
@@ -38,6 +39,7 @@ namespace OSVR
                 recentered = false;
                 _clientKit = FindObjectOfType<ClientKit>();
                 _displayController = FindObjectOfType<DisplayController>();
+                _vrController = FindObjectOfType<OsvrUnityNativeVR>();
             }
 
             void Update()
@@ -47,6 +49,11 @@ namespace OSVR
                     if (_displayController != null && _displayController.CheckDisplayStartup() && _displayController.UseRenderManager)
                     {
                         _displayController.RenderManager.SetRoomRotationUsingHead();
+                        recentered = true;
+                    }
+                    else if (_vrController != null && _vrController.RenderManager != null)
+                    {
+                        _vrController.RenderManager.SetRoomRotationUsingHead();
                         recentered = true;
                     }
                     else if (_displayController != null && _displayController.CheckDisplayStartup() && !_displayController.UseRenderManager)

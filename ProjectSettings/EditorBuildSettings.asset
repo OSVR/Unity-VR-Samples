@@ -5,15 +5,42 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Intro_OSVR.unity
-  - enabled: 1
+    guid: ab90a765c459d1d4c8fd5f68ae668869
+  - enabled: 0
     path: Assets/Scenes/MainMenu_OSVR.unity
-  - enabled: 1
+    guid: 5186213e6d36dac4b85c79721a885d8a
+  - enabled: 0
     path: Assets/Scenes/Flyer_OSVR.unity
-  - enabled: 1
+    guid: 4e5a31e8769bb41468f5980d278bc4b5
+  - enabled: 0
     path: Assets/Scenes/Maze_OSVR.unity
-  - enabled: 1
+    guid: d7bd79de8eae47f4d8b85b44354bdf31
+  - enabled: 0
     path: Assets/Scenes/Shooter180_OSVR.unity
-  - enabled: 1
+    guid: a90935a2fd92ac349bb8ae04eaa27907
+  - enabled: 0
     path: Assets/Scenes/Shooter360_OSVR.unity
+    guid: a7e575a936df48040941e246c49610ff
+  - enabled: 0
+    path: Assets/VRSampleScenes/Scenes/Intro.unity
+    guid: 1c5fe2bf037ade84ca9ed9d97b0e1b97
+  - enabled: 1
+    path: Assets/Scenes/Intro_OSVR_unityvr.unity
+    guid: f0d3d3e762de9db469438a1d04d68f9a
+  - enabled: 1
+    path: Assets/Scenes/MainMenu_OSVR_unityvr.unity
+    guid: e01dccb2440c9664cb9e9b43c3d67bfa
+  - enabled: 1
+    path: Assets/Scenes/Flyer_OSVR_unityvr.unity
+    guid: 9668e5c3d4fde0c4e90ea08648aa1d31
+  - enabled: 1
+    path: Assets/Scenes/Maze_OSVR_unityvr.unity
+    guid: ffc1d0002feb63e4d99face7be83ceef
+  - enabled: 1
+    path: Assets/Scenes/Shooter180_OSVR_unityvr.unity
+    guid: 930406b8cdcd5a249b7dd504f403d3f5
+  - enabled: 1
+    path: Assets/Scenes/Shooter360_OSVR_unityvr.unity
+    guid: 00000000000000000000000000000000

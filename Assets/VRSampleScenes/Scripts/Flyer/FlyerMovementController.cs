@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine.UI;
 using UnityEngine.VR;
 using VRStandardAssets.Common;
@@ -72,9 +71,7 @@ namespace VRStandardAssets.Flyer
             while (m_IsGameRunning)
             {
                 // Set the target marker position to a point forward of the camera multiplied by the distance from the camera.
-                //InputTracking.GetLocalRotation(VRNode.Head);
-                //m_Camera.transform.rotation
-                Quaternion headRotation = m_Camera.transform.rotation;
+                Quaternion headRotation = m_Camera.localRotation;// InputTracking.GetLocalRotation (VRNode.Head);
                 m_TargetMarker.position = m_Camera.position + (headRotation * Vector3.forward) * m_DistanceFromCamera;
 
                 // Move the camera container forward.
