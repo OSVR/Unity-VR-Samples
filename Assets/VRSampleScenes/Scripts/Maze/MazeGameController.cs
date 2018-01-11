@@ -134,7 +134,7 @@ namespace VRStandardAssets.Maze
                 m_GameOverAudioSource.Play();
 
                 // Wait for the particles to finish.
-                yield return new WaitForSeconds(m_WinParticles.duration);
+                yield return new WaitForSeconds(m_WinParticles.main.duration);
 
                 // Wait for the win UI to fade in.
                 yield return StartCoroutine (m_WinFader.InteruptAndFadeIn ());

@@ -23,7 +23,7 @@ AudioMixerController:
     - 8dee331f102972341986b60c0446d23f
     name: View
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: 24500003}
+  m_TargetSnapshot: {fileID: 24515028}
 --- !u!243 &24300001
 AudioMixerGroupController:
   m_ObjectHideFlags: 0

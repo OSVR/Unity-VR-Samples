@@ -25,8 +25,8 @@ namespace VRStandardAssets.Flyer
             // Go through all the particle systems and if their duration is longer use that instead.
             for (int i = 0; i < m_ParticleSystems.Length; i++)
             {
-                if (m_ParticleSystems[i].duration > m_Duration)
-                    m_Duration = m_ParticleSystems[i].duration;
+                if (m_ParticleSystems[i].main.duration > m_Duration)
+					m_Duration = m_ParticleSystems[i].main.duration;
             }
         }
 

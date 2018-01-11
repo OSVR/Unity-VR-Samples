@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityStandardAssets.Characters.ThirdPerson;
+using UnityEngine.AI;
 
 namespace VRStandardAssets.Maze
 {
@@ -131,7 +131,7 @@ namespace VRStandardAssets.Maze
             m_Animator.SetTrigger(m_HashDyingPara);
 
             // Stop the NavMeshAgent from moving the character.
-            m_Agent.Stop();
+            m_Agent.isStopped = true;
 
             // In order play the clips of the player being hit and then dying.
             yield return StartCoroutine (PlayClipAndWait (m_PlayerHitClip));
